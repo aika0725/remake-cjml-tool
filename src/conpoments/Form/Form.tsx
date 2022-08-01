@@ -5,16 +5,32 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import ActorCard from '../ActorCard/ActorCard'
-import ButtonAdd from '../ButtonAdd/ButtonAdd'
+
+import Test from '../Test/test'
+
+import { Formik, FormikProps } from 'formik'
+
+import * as yup from 'yup'
+import { IFormData } from '../../interfaces/FormData'
+
+const validationSchema = yup.object({
+  actors: yup.array().of(
+    yup.object({
+      actorName: yup.string().required('Actor name is required'),
+      actorRole: yup.string().required('Actor Role is required'),
+    }),
+  ),
+})
+// actorName: yup.string().required('Actor name is required'),
+// actorRole: yup.string().required('Actor Role is required'),
 
 function Form() {
+  // Set window status -----------------------------
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => () => {
     setOpen(true)
   }
-
   const handleClose = () => {
     setOpen(false)
   }
@@ -43,19 +59,35 @@ function Form() {
         maxWidth='sm'
       >
         <DialogTitle id='form-dialog'>Create a CJML diagram</DialogTitle>
-        <form>
-          <DialogContent dividers={true}>
-            <div>Actors</div>
-            <ActorCard />
-            <ActorCard />
-            <ButtonAdd />
-            <div>Touchpoints</div>
-            <ButtonAdd />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Submit</Button>
-          </DialogActions>
-        </form>
+        <DialogContent dividers={true}>
+          <Formik
+            initialValues={{
+              actors: [
+                { id: 0, actorName: '', actorRole: '' },
+                { id: 1, actorName: '', actorRole: '' },
+              ],
+            }}
+            onSubmit={(values) => {
+              alert(JSON.stringify(values, null, 2))
+            }}
+            validationSchema={validationSchema}
+          >
+            {(formikProps: FormikProps<IFormData>) => {
+              console.log(formikProps.values.actors[0].actorName)
+              return (
+                <form onSubmit={formikProps.handleSubmit}>
+                  <Test />
+                  <Button color='primary' variant='contained' fullWidth type='submit'>
+                    Submit
+                  </Button>
+                </form>
+              )
+            }}
+          </Formik>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
       </Dialog>
     </div>
   )

@@ -12,7 +12,3 @@ export interface ITouchpoint {
   receiverCategory?: string
   time?: string
 }
-
-export interface ITouchpoints {
-  touchpoints: []
-}

@@ -5,18 +5,18 @@ import TextInputActor from '../TextInputActor/TextInputActor'
 
 const theme = createTheme({
   palette: {
-    primary: {
-      // Purple and green play nicely together.
-      main: '#3160ed',
-    },
     secondary: {
-      // This is green.A700 as hex.
       main: '#d5d5d5',
     },
   },
 })
 
-const ActorCard = () => {
+type props = {
+  key: number
+  order: number
+}
+
+const ActorCard = (props: props) => {
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -24,7 +24,7 @@ const ActorCard = () => {
           bgcolor: 'secondary.main',
         }}
       >
-        <p>Actor x</p>
+        <p>Actor {props.order}</p>
         <Box sx={{ display: 'inline-flex' }}>
           <TextInputActor />
           <SelectRole />

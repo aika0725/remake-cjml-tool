@@ -1,10 +1,16 @@
 import { Button } from '@mui/material'
 import React from 'react'
 
-const ButtonAdd = () => {
+type ButtonProps = {
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void
+}
+
+const ButtonAdd = (props: ButtonProps) => {
   return (
     <div>
-      <Button>Add</Button>
+      <Button variant='outlined' color='error' onClick={props.handleClick}>
+        Add
+      </Button>
     </div>
   )
 }
