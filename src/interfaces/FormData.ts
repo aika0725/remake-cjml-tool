@@ -3,5 +3,5 @@ import { ITouchpoint } from './Touchpoint'
 
 export interface IFormData {
   actors: IActor[]
-  //   touchpoints: ITouchpoint[]
+  touchpoints: ITouchpoint[]
 }

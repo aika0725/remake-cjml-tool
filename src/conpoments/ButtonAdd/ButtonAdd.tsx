@@ -9,7 +9,7 @@ const ButtonAdd = (props: ButtonProps) => {
   return (
     <div>
       <Button variant='outlined' color='error' onClick={props.handleClick}>
-        Add
+        Add+
       </Button>
     </div>
   )

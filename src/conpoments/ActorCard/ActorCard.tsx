@@ -1,36 +1,58 @@
-import { Box, createTheme, ThemeProvider } from '@mui/material'
 import React from 'react'
-import SelectRole from '../SelectRole/SelectRole'
-import TextInputActor from '../TextInputActor/TextInputActor'
 
-const theme = createTheme({
-  palette: {
-    secondary: {
-      main: '#d5d5d5',
-    },
-  },
-})
+import { useFormikContext } from 'formik'
+import { TextField, MenuItem } from '@material-ui/core'
+import { IFormData } from '../../interfaces/FormData'
 
-type props = {
-  key: number
-  order: number
+type Props = {
+  name: string
+  index: number
+  role: string
 }
 
-const ActorCard = (props: props) => {
+const ActorCard = (props: Props) => {
+  const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
+
   return (
-    <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          bgcolor: 'secondary.main',
-        }}
+    <div>
+      <TextField
+        fullWidth
+        id={props.name}
+        name={props.name}
+        label='Actor name'
+        value={values.actors[props.index].actorName}
+        onChange={handleChange}
+        error={
+          touched.actors &&
+          Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorName)
+        }
+        helperText={
+          touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorName
+        }
+      />
+      <TextField
+        id={props.role}
+        name={props.role}
+        select
+        label='Actor role'
+        value={values.actors[props.index].actorRole}
+        onChange={handleChange}
+        margin='normal'
+        error={
+          // Need to check why this needs type conversion o unknown
+          touched.actors &&
+          Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorRole)
+        }
+        helperText={
+          touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorRole
+        }
+        fullWidth
       >
-        <p>Actor {props.order}</p>
-        <Box sx={{ display: 'inline-flex' }}>
-          <TextInputActor />
-          <SelectRole />
-        </Box>
-      </Box>
-    </ThemeProvider>
+        <MenuItem value={'customer'}>Customer/User</MenuItem>
+        <MenuItem value={'service-provider'}>Service Provider</MenuItem>
+        <MenuItem value={'attacker'}>Attacker</MenuItem>
+      </TextField>
+    </div>
   )
 }
 

@@ -3,12 +3,10 @@ export interface ITouchpoint {
   type: string
   channel?: string
   senderName: string
-  senderID: string
   senderDescription: string
-  senderCategory?: string
+  senderRiskCategory?: string
   receiverName?: string
-  receiverID?: string
   receiverDescription?: string
-  receiverCategory?: string
+  receiverRiskCategory?: string
   time?: string
 }
