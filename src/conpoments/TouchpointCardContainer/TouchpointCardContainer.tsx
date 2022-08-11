@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import ActionCard from '../ActionCard/ActionCard'
 import CommunicationCard from '../CommunicationCard/CommunicationCard'

@@ -17,6 +17,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 import TouchpointCard from '../TouchpointCard/TouchpointCard'
 import { Divider } from '@mui/material'
+import DeleteButton from '../DeleteButton/DeleteButton'
 
 const validationSchema = yup.object({
   actors: yup.array().of(
@@ -101,45 +102,41 @@ function Form() {
                   {/* ---------------------------------- */}
                   <FieldArray
                     name='actors'
-                    render={(arrayHelpers) => (
-                      <div>
-                        {formikProps.values.actors.map((actor, index) => (
-                          <div key={index}>
-                            {/** both these conventions do the same */}
-                            <ActorCard
-                              name={`actors[${index}].actorName`}
-                              role={`actors[${index}].actorRole`}
-                              index={index}
-                            />
+                    render={(arrayHelpers) => {
+                      return (
+                        <div>
+                          {formikProps.values.actors.map((actor, index) => (
+                            <div key={index}>
+                              {/** both these conventions do the same */}
+                              <ActorCard
+                                name={`actors[${index}].actorName`}
+                                role={`actors[${index}].actorRole`}
+                                index={index}
+                              />
+                              <DeleteButton arrayHelpers={arrayHelpers} index={index} />
+                            </div>
+                          ))}
 
-                            <Button
-                              variant='outlined'
-                              startIcon={<DeleteIcon />}
-                              onClick={() => arrayHelpers.remove(index)}
-                              color='error'
-                            >
-                              Delete
-                            </Button>
-                          </div>
-                        ))}
-
-                        <Button
-                          variant='outlined'
-                          startIcon={<AddIcon />}
-                          onClick={() => arrayHelpers.push({ id: 0, actorName: '', actorRole: '' })}
-                        >
-                          New actor
-                        </Button>
-                      </div>
-                    )}
+                          <Button
+                            variant='outlined'
+                            startIcon={<AddIcon />}
+                            onClick={() =>
+                              arrayHelpers.push({ id: 0, actorName: '', actorRole: '' })
+                            }
+                          >
+                            New actor
+                          </Button>
+                        </div>
+                      )
+                    }}
                   />
                   <br />
-                  <Divider variant='middle' />
+                  <Divider />
                   <br />
                   <h2>Touchpoints</h2>
                   <TouchpointCard />
                   {/* -------------------------------- */}
-                  
+
                   <Button color='primary' variant='contained' fullWidth type='submit'>
                     Submit
                   </Button>
