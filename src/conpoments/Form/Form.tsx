@@ -1,23 +1,22 @@
-import React from 'react'
-
+import AddIcon from '@mui/icons-material/Add'
+import { Divider, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-
-import ActorCard from '../ActorCard/ActorCard'
-
 import { FieldArray, Formik, FormikProps } from 'formik'
-
+import React, { useState } from 'react'
 import * as yup from 'yup'
-import { IFormData } from '../../interfaces/FormData'
 
-import DeleteIcon from '@mui/icons-material/Delete'
-import AddIcon from '@mui/icons-material/Add'
-import TouchpointCard from '../TouchpointCard/TouchpointCard'
-import { Divider } from '@mui/material'
+import { formInitialValues, IFormData } from '../../interfaces/FormData'
+import { ITouchpoint, TouchpointType } from '../../interfaces/Touchpoint'
+import ActionCard from '../ActionCard'
+import ActorCard from '../ActorCard/ActorCard'
+import CommunicationCard from '../CommunicationCard'
 import DeleteButton from '../DeleteButton/DeleteButton'
+import * as S from '../Styles/FormCard'
+import TouchpointTypeButtons from '../TouchpointTypeButtons/TouchpointTypeButtons'
 
 const validationSchema = yup.object({
   actors: yup.array().of(
@@ -43,7 +42,8 @@ function Form() {
   const handleClose = () => {
     setOpen(false)
   }
-
+  const [type, setType] = useState('')
+  const [hasChosen, setHasChosen] = useState(false)
   const descriptionElementRef = React.useRef<HTMLElement>(null)
   React.useEffect(() => {
     if (open) {
@@ -54,35 +54,23 @@ function Form() {
     }
   }, [open])
 
-  const formInitialValues: IFormData = {
-    actors: [{ id: 0, actorName: '', actorRole: '' }],
-    touchpoints: [
-      {
-        id: 0,
-        type: '',
-        channel: '',
-        senderName: '',
-        senderDescription: '',
-        senderRiskCategory: '',
-        receiverName: '',
-        receiverDescription: '',
-        receiverRiskCategory: '',
-      },
-    ],
-  }
-
   return (
     <div>
       <Button onClick={handleClickOpen()}>open</Button>
 
       <Dialog
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         scroll='paper'
         aria-labelledby='form-dialog'
         aria-describedby='form-dialog-window'
         fullWidth
-        maxWidth='sm'
+        PaperProps={{
+          sx: {
+            width: '100%',
+            maxWidth: '1000px!important',
+          },
+        }}
       >
         <DialogTitle id='form-dialog'>Create a CJML diagram</DialogTitle>
         <DialogContent dividers={true}>
@@ -94,11 +82,11 @@ function Form() {
             validationSchema={validationSchema}
           >
             {(formikProps: FormikProps<IFormData>) => {
-              console.log(formikProps.values.actors)
-              console.log(formikProps)
+              console.log(formikProps.values)
               return (
                 <form onSubmit={formikProps.handleSubmit}>
-                  <h2>Actors</h2>
+                  <Typography variant='h5'>Actors</Typography>
+
                   {/* ---------------------------------- */}
                   <FieldArray
                     name='actors'
@@ -108,12 +96,17 @@ function Form() {
                           {formikProps.values.actors.map((actor, index) => (
                             <div key={index}>
                               {/** both these conventions do the same */}
-                              <ActorCard
-                                name={`actors[${index}].actorName`}
-                                role={`actors[${index}].actorRole`}
-                                index={index}
-                              />
-                              <DeleteButton arrayHelpers={arrayHelpers} index={index} />
+                              <S.FormCard>
+                                <S.CardTitle>
+                                  <div>Actor {index + 1}</div>
+                                  <DeleteButton arrayHelpers={arrayHelpers} index={index} />
+                                </S.CardTitle>
+                                <ActorCard
+                                  name={`actors[${index}].actorName`}
+                                  role={`actors[${index}].actorRole`}
+                                  index={index}
+                                />
+                              </S.FormCard>
                             </div>
                           ))}
 
@@ -133,10 +126,29 @@ function Form() {
                   <br />
                   <Divider />
                   <br />
-                  <h2>Touchpoints</h2>
-                  <TouchpointCard />
-                  {/* -------------------------------- */}
+                  <Typography variant='h5'>Touchpoints</Typography>
 
+                  <FieldArray
+                    name='touchpoints'
+                    render={(arrayHelpers) => {
+                      console.log('1')
+                      console.log(formikProps.values.touchpoints)
+                      return (
+                        <div>
+                          {formikProps.values.touchpoints.map((touchpoint: ITouchpoint, index) => (
+                            <div key={index}>
+                              {touchpoint.type === TouchpointType.Action ? (
+                                <ActionCard index={index} arrayHelpers={arrayHelpers} />
+                              ) : (
+                                <CommunicationCard />
+                              )}
+                            </div>
+                          ))}
+                          <TouchpointTypeButtons arrayHelpers={arrayHelpers} />
+                        </div>
+                      )
+                    }}
+                  />
                   <Button color='primary' variant='contained' fullWidth type='submit'>
                     Submit
                   </Button>

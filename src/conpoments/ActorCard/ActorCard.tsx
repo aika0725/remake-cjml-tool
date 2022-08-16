@@ -1,8 +1,10 @@
 import React from 'react'
 
 import { useFormikContext } from 'formik'
-import { TextField, MenuItem } from '@material-ui/core'
+import { MenuItem } from '@material-ui/core'
 import { IFormData } from '../../interfaces/FormData'
+// import * as S from '../Styles/FormCard'
+import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
 
 type Props = {
   name: string
@@ -14,14 +16,13 @@ const ActorCard = (props: Props) => {
   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
   console.log(props.name)
   return (
-    <div>
-      <TextField
-        fullWidth
+    <>
+      <GenericInputTextField
         id={props.name}
         name={props.name}
         label='Actor name'
         value={values.actors[props.index].actorName}
-        onChange={handleChange}
+        handleChange={handleChange}
         error={
           touched.actors &&
           Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorName)
@@ -29,15 +30,17 @@ const ActorCard = (props: Props) => {
         helperText={
           touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorName
         }
-      />
-      <TextField
+        mandatory
+      ></GenericInputTextField>
+
+      <GenericInputTextField
+        mandatory
         id={props.role}
         name={props.role}
         select
         label='Actor role'
         value={values.actors[props.index].actorRole}
-        onChange={handleChange}
-        margin='normal'
+        handleChange={handleChange}
         error={
           // Need to check why this needs type conversion o unknown
           touched.actors &&
@@ -46,13 +49,12 @@ const ActorCard = (props: Props) => {
         helperText={
           touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorRole
         }
-        fullWidth
       >
         <MenuItem value={'customer'}>Customer/User</MenuItem>
         <MenuItem value={'service-provider'}>Service Provider</MenuItem>
         <MenuItem value={'attacker'}>Attacker</MenuItem>
-      </TextField>
-    </div>
+      </GenericInputTextField>
+    </>
   )
 }
 

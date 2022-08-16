@@ -1,13 +1,14 @@
-import { Divider, FormControl, FormLabel, TextField } from '@material-ui/core'
+import { Divider, FormControl, FormLabel } from '@material-ui/core'
 import { useFormikContext } from 'formik'
 import React from 'react'
+
 import { IFormData } from '../../interfaces/FormData'
 import ActorRadios from '../ActorRadios/ActorRadios'
+import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
 import SecurityRadios from '../SecurityRadios/SecurityRadios'
 
 const CommunicationCard = () => {
   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
-  console.log(values)
   return (
     <div>
       <h3>Communication point </h3>
@@ -17,13 +18,13 @@ const CommunicationCard = () => {
       </FormControl>
       <Divider variant='middle' />
 
-      <TextField
-        fullWidth
+      <GenericInputTextField
+        mandatory
         id='0'
         name='touchpoints[0].senderDescription'
         label='Sender activity description'
         value={values.touchpoints[0].senderDescription}
-        onChange={handleChange}
+        handleChange={handleChange}
         error={
           touched.touchpoints &&
           Boolean((errors as unknown as IFormData).touchpoints?.[0]?.senderDescription)
@@ -43,13 +44,13 @@ const CommunicationCard = () => {
       </FormControl>
       <Divider variant='middle' />
 
-      <TextField
-        fullWidth
+      <GenericInputTextField
+        mandatory
         id='0'
         name='touchpoints[0].receiverDescription'
         label='Receiver activity description'
         value={values.touchpoints[0].receiverDescription}
-        onChange={handleChange}
+        handleChange={handleChange}
         error={
           touched.touchpoints &&
           Boolean((errors as unknown as IFormData).touchpoints?.[0]?.receiverDescription)
