@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import { IFormData } from '../../interfaces/FormData'
 import { useFormikContext } from 'formik'
-
+import * as S from '../Styles/FormCard'
 type Props = {
   name: string
 }
@@ -16,7 +16,11 @@ const SecurityRadios = (props: Props) => {
 
   return (
     <FormControl>
-      <FormLabel id='risk-options'>Is this action a threat or unwanted incident?</FormLabel>
+      <FormLabel id='risk-options'>
+        <S.BlacLabelTextTypography>
+          Is this action a threat or unwanted incident?
+        </S.BlacLabelTextTypography>
+      </FormLabel>
       <RadioGroup row name={props.name} onChange={handleChange}>
         <FormControlLabel value='threat' control={<Radio />} label='Threat' />
         <FormControlLabel value='incident' control={<Radio />} label='Unwanted incident' />

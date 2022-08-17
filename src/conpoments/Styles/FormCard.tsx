@@ -1,23 +1,96 @@
 import styled from '@emotion/styled'
+import { Typography, withStyles } from '@material-ui/core'
+import { createTheme } from '@mui/material'
 
 const FormCard = styled.div`
   /* height: fit-content; */
-  margin: 1.5rem 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 30px 30px;
+  margin-bottom: 15px;
 
-  border-style: solid;
-  border-color: #d5d5d5;
-  padding: 25px;
-  border-radius: 16px;
+  width: 100%;
+  height: auto;
+
+  background: #ffffff;
+
+  border: 1px solid #003968;
+  border-radius: 4px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 `
 
-const CardTitle = styled.div`
+const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 1.6rem;
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  width: 100%;
+`
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  width: 100%;
+  gap: 16px;
+  margin-top: 20px;
+`
+
+const Section = styled.section`
+  width: 100%;
+  height: auto;
+  /* margin-bottom: 35px; */
+  margin-top: 35px;
+`
+const SectionTitle = styled.div`
+  margin-bottom: 20px;
+`
+const FormContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  /* height: 89.5vh; */
+  height: 90%;
+  width: 50%;
+  max-width: 722px;
+  background-color: #fafaff;
+  border-right: 1px solid #003968;
+  position: absolute;
+  left: 0;
+  top: 77px;
+  padding: 0px 30px;
+  margin-left: 7.5px;
+  overflow-y: auto;
+
+  @media (max-width: 550px) {
+    width: 100%;
+  }
 `
 
 const TouchpointContainer = styled.div`
   padding: 16px 0 0 0;
 `
-export { FormCard, CardTitle, TouchpointContainer }
+const FontTheme = createTheme({
+  typography: {
+    fontSize: 13,
+  },
+})
+
+const BlacLabelTextTypography = withStyles({
+  root: {
+    color: '#000000',
+    fontSize: 13,
+  },
+})(Typography)
+
+export {
+  FormContainer,
+  Row,
+  FormCard,
+  CardHeader,
+  TouchpointContainer,
+  FontTheme,
+  BlacLabelTextTypography,
+  Section,
+  SectionTitle,
+}

@@ -58,58 +58,42 @@ function Form() {
     <div>
       <Button onClick={handleClickOpen()}>open</Button>
 
-      <Dialog
-        open={open}
-        // onClose={handleClose}
-        scroll='paper'
-        aria-labelledby='form-dialog'
-        aria-describedby='form-dialog-window'
-        fullWidth
-        PaperProps={{
-          sx: {
-            width: '100%',
-            maxWidth: '1000px!important',
-          },
-        }}
-      >
-        <DialogTitle id='form-dialog'>Create a CJML diagram</DialogTitle>
-        <DialogContent dividers={true}>
-          <Formik
-            initialValues={formInitialValues}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2))
-            }}
-            validationSchema={validationSchema}
-          >
-            {(formikProps: FormikProps<IFormData>) => {
-              console.log(formikProps.values)
-              return (
-                <form onSubmit={formikProps.handleSubmit}>
-                  <Typography variant='h5'>Actors</Typography>
+      <S.FormContainer>
+        <Formik
+          initialValues={formInitialValues}
+          onSubmit={(values) => {
+            alert(JSON.stringify(values, null, 2))
+          }}
+          validationSchema={validationSchema}
+        >
+          {(formikProps: FormikProps<IFormData>) => {
+            console.log(formikProps.values)
+            return (
+              <form onSubmit={formikProps.handleSubmit} style={{ width: '100%' }}>
+                <S.Section>
+                  <S.SectionTitle>
+                    <Typography variant='h5'>Actors</Typography>
+                  </S.SectionTitle>
 
                   {/* ---------------------------------- */}
                   <FieldArray
                     name='actors'
                     render={(arrayHelpers) => {
                       return (
-                        <div>
+                        <>
                           {formikProps.values.actors.map((actor, index) => (
-                            <div key={index}>
-                              {/** both these conventions do the same */}
-                              <S.FormCard>
-                                <S.CardTitle>
-                                  <div>Actor {index + 1}</div>
-                                  <DeleteButton arrayHelpers={arrayHelpers} index={index} />
-                                </S.CardTitle>
-                                <ActorCard
-                                  name={`actors[${index}].actorName`}
-                                  role={`actors[${index}].actorRole`}
-                                  index={index}
-                                />
-                              </S.FormCard>
-                            </div>
+                            <S.FormCard key={index}>
+                              <S.CardHeader>
+                                <Typography variant='h6'>Actor #{index + 1}</Typography>
+                                <DeleteButton arrayHelpers={arrayHelpers} index={index} />
+                              </S.CardHeader>
+                              <ActorCard
+                                name={`actors[${index}].actorName`}
+                                role={`actors[${index}].actorRole`}
+                                index={index}
+                              />
+                            </S.FormCard>
                           ))}
-
                           <Button
                             variant='outlined'
                             startIcon={<AddIcon />}
@@ -119,15 +103,15 @@ function Form() {
                           >
                             New actor
                           </Button>
-                        </div>
+                        </>
                       )
                     }}
                   />
-                  <br />
-                  <Divider />
-                  <br />
-                  <Typography variant='h5'>Touchpoints</Typography>
-
+                </S.Section>
+                <S.Section>
+                  <S.SectionTitle>
+                    <Typography variant='h5'>Touchpoints</Typography>
+                  </S.SectionTitle>
                   <FieldArray
                     name='touchpoints'
                     render={(arrayHelpers) => {
@@ -149,18 +133,20 @@ function Form() {
                       )
                     }}
                   />
-                  <Button color='primary' variant='contained' fullWidth type='submit'>
-                    Submit
-                  </Button>
-                </form>
-              )
-            }}
-          </Formik>
-        </DialogContent>
+                </S.Section>
+                <Button color='primary' variant='contained' fullWidth type='submit'>
+                  Submit
+                </Button>
+              </form>
+            )
+          }}
+        </Formik>
+      </S.FormContainer>
+      {/* </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { TextField } from '@material-ui/core'
+import TextField from '@mui/material/TextField'
 
 type Props = {
   id: string

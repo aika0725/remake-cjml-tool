@@ -3,7 +3,7 @@ import React from 'react'
 import { useFormikContext } from 'formik'
 import { MenuItem } from '@material-ui/core'
 import { IFormData } from '../../interfaces/FormData'
-// import * as S from '../Styles/FormCard'
+import * as S from '../Styles/FormCard'
 import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
 
 type Props = {
@@ -16,7 +16,7 @@ const ActorCard = (props: Props) => {
   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
   console.log(props.name)
   return (
-    <>
+    <S.Row>
       <GenericInputTextField
         id={props.name}
         name={props.name}
@@ -54,7 +54,7 @@ const ActorCard = (props: Props) => {
         <MenuItem value={'service-provider'}>Service Provider</MenuItem>
         <MenuItem value={'attacker'}>Attacker</MenuItem>
       </GenericInputTextField>
-    </>
+    </S.Row>
   )
 }
 
