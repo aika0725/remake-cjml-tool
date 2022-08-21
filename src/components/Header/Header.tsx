@@ -1,22 +1,32 @@
-import React from 'react'
-import Button from '@mui/material/Button'
-
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
+import React, { useContext } from 'react'
+import {
+  AppBar,
+  Typography,
+  IconButton,
+  Button,
+  Box,
+  Toolbar,
+  Menu,
+  Container,
+  MenuItem,
+} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
 
-const items = ['Start/Edit', 'Export diagram as Image', 'Export diagram as XML', 'User Guide']
+import { OpenStatusContext } from '../Context/OpenStatusContext'
+
+const items = ['Export diagram as Image', 'Export diagram as XML', 'User Guide']
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+  const { open, setOpen } = useContext(OpenStatusContext)
 
+  const handleDrawerOpen = () => {
+    setOpen(true)
+  }
+
+  const handleDrawerClose = () => {
+    setOpen(false)
+  }
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -26,10 +36,13 @@ const Header = () => {
   }
 
   return (
-    <AppBar position='static' style={{ background: '#1e62a2' }}>
+    <AppBar
+      position='static'
+      style={{ background: '#1e62a2' }}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant='h6'
             noWrap
@@ -77,6 +90,7 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              <MenuItem key='start'>Start/Edit</MenuItem>
               {items.map((item) => (
                 <MenuItem key={item} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center' style={{ textTransform: 'none' }}>
@@ -88,6 +102,14 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Button
+              key='start'
+              onClick={handleDrawerOpen}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              style={{ textTransform: 'none' }}
+            >
+              Start/Edit
+            </Button>
             {items.map((item) => (
               <Button
                 key={item}

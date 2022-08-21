@@ -7,7 +7,7 @@ export interface ITouchpoint {
   receiverName?: string
   receiverDescription?: string
   receiverRiskCategory?: string
-  time?: string
+  time?: Date | null
 }
 
 export const touchpointInitialValues: ITouchpoint = {
@@ -16,6 +16,7 @@ export const touchpointInitialValues: ITouchpoint = {
   senderName: '',
   senderDescription: '',
   senderRiskCategory: '',
+  time: null,
   receiverName: '',
   receiverDescription: '',
   receiverRiskCategory: '',

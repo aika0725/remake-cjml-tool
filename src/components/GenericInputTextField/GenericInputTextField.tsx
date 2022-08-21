@@ -6,7 +6,6 @@ type Props = {
   name: string
   label: string
   value: string | undefined
-  //   onChange?: StandardInputProps['onChange'];
   handleChange: (e: string | ChangeEvent<any>) => void
   error: boolean | undefined
   helperText: string | undefined
@@ -14,6 +13,7 @@ type Props = {
   select?: boolean
   margin?: 'none' | 'dense' | 'normal'
   children?: React.ReactNode
+  multiline?: boolean
 }
 
 const GenericInputTextField = (props: Props) => {
@@ -30,6 +30,7 @@ const GenericInputTextField = (props: Props) => {
       helperText={props.helperText}
       select={props.select ? true : false}
       margin={props.margin}
+      multiline={props.multiline}
     >
       {props.children}
     </TextField>

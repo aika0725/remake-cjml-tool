@@ -1,22 +1,23 @@
+import React, { useEffect } from 'react'
+
 import AddIcon from '@mui/icons-material/Add'
-import { Divider, Typography } from '@mui/material'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { Divider, Typography, IconButton, Button } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+
 import { FieldArray, Formik, FormikProps } from 'formik'
-import React, { useState } from 'react'
 import * as yup from 'yup'
 
+import * as S from '../Styles/FormCard'
 import { formInitialValues, IFormData } from '../../interfaces/FormData'
 import { ITouchpoint, TouchpointType } from '../../interfaces/Touchpoint'
 import ActionCard from '../ActionCard'
 import ActorCard from '../ActorCard/ActorCard'
 import CommunicationCard from '../CommunicationCard'
 import DeleteButton from '../DeleteButton/DeleteButton'
-import * as S from '../Styles/FormCard'
 import TouchpointTypeButtons from '../TouchpointTypeButtons/TouchpointTypeButtons'
+import { OpenStatusContext } from '../Context/OpenStatusContext'
 
 const validationSchema = yup.object({
   actors: yup.array().of(
@@ -29,36 +30,27 @@ const validationSchema = yup.object({
     yup.object({
       senderName: yup.string().required('Sender/Initiator name is required'),
       senderDescription: yup.string().required('Activity description is required'),
+      receiverName: yup.string().required('receiver name is required'),
+      receiverDescription: yup.string().required('Activity description is required'),
     }),
   ),
 })
 
 function Form() {
-  const [open, setOpen] = React.useState(false)
+  const theme = useTheme()
 
-  const handleClickOpen = () => () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
+  const { open, setOpen } = React.useContext(OpenStatusContext)
+  useEffect(() => {
+    console.log(open)
+  }, [open])
+
+  const handleDrawerClose = () => {
     setOpen(false)
   }
-  const [type, setType] = useState('')
-  const [hasChosen, setHasChosen] = useState(false)
-  const descriptionElementRef = React.useRef<HTMLElement>(null)
-  React.useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef
-      if (descriptionElement !== null) {
-        descriptionElement.focus()
-      }
-    }
-  }, [open])
 
   return (
     <div>
-      <Button onClick={handleClickOpen()}>open</Button>
-
-      <S.FormContainer>
+      <S.FormContainer open={open}>
         <Formik
           initialValues={formInitialValues}
           onSubmit={(values) => {
@@ -70,6 +62,13 @@ function Form() {
             console.log(formikProps.values)
             return (
               <form onSubmit={formikProps.handleSubmit} style={{ width: '100%' }}>
+                <S.FormHeader>
+                  <S.CJMLFormHeaderTypography>Create a CJML diagram</S.CJMLFormHeaderTypography>
+                  <IconButton onClick={handleDrawerClose}>
+                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                  </IconButton>
+                </S.FormHeader>
+                <Divider />
                 <S.Section>
                   <S.SectionTitle>
                     <Typography variant='h5'>Actors</Typography>
@@ -115,7 +114,6 @@ function Form() {
                   <FieldArray
                     name='touchpoints'
                     render={(arrayHelpers) => {
-                      console.log('1')
                       console.log(formikProps.values.touchpoints)
                       return (
                         <div>
@@ -124,7 +122,7 @@ function Form() {
                               {touchpoint.type === TouchpointType.Action ? (
                                 <ActionCard index={index} arrayHelpers={arrayHelpers} />
                               ) : (
-                                <CommunicationCard />
+                                <CommunicationCard index={index} arrayHelpers={arrayHelpers} />
                               )}
                             </div>
                           ))}
@@ -142,11 +140,6 @@ function Form() {
           }}
         </Formik>
       </S.FormContainer>
-      {/* </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog> */}
     </div>
   )
 }

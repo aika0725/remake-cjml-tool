@@ -5,6 +5,7 @@ import { MenuItem } from '@material-ui/core'
 import { IFormData } from '../../interfaces/FormData'
 import * as S from '../Styles/FormCard'
 import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
+import { ActorRoles } from '../../interfaces/Actor'
 
 type Props = {
   name: string
@@ -50,9 +51,10 @@ const ActorCard = (props: Props) => {
           touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorRole
         }
       >
-        <MenuItem value={'customer'}>Customer/User</MenuItem>
-        <MenuItem value={'service-provider'}>Service Provider</MenuItem>
-        <MenuItem value={'attacker'}>Attacker</MenuItem>
+        <MenuItem value={ActorRoles.Customer}>Customer/User</MenuItem>
+        <MenuItem value={ActorRoles.ServiceProvider}>Service Provider</MenuItem>
+        <MenuItem value={ActorRoles.Attacker}>Attacker</MenuItem>
+        <MenuItem value={ActorRoles.System}>System</MenuItem>
       </GenericInputTextField>
     </S.Row>
   )
