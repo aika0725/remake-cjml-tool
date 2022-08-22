@@ -54,19 +54,19 @@ const SectionTitle = styled.div`
 const FormContainer = styled.div<OpenContext['open']>`
   box-sizing: border-box;
   display: ${(props) => (props.open ? 'flex' : 'none')};
-  height: 90%;
+  height: 100%;
   width: 50%;
   max-width: 722px;
   background-color: #fafaff;
   border-right: 1px solid #003968;
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   top: 77px;
   padding: 0px 30px;
   margin-left: 7.5px;
   overflow-y: auto;
 
-  @media (max-width: 550px) {
+  @media (max-width: 566px) {
     width: 100%;
   }
 `
@@ -97,26 +97,22 @@ const CJMLFormHeaderTypography = withStyles({
   },
 })(Typography)
 
-// const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-//   open?: boolean
-// }>(({ theme, open }) => ({
-//   flexGrow: 1,
-//   padding: theme.spacing(3),
-//   transition: theme.transitions.create('margin', {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   marginLeft: `-${drawerWidth}px`,
-//   ...(open && {
-//     transition: theme.transitions.create('margin', {
-//       easing: theme.transitions.easing.easeOut,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//     marginLeft: 0,
-//   }),
-// }))
+const Canvas = styled.div`
+  top: 77px;
+  margin-top: 7px;
+`
+const Main = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  @media (max-width: 566px) {
+    flex-direction: column;
+  }
+`
 
 export {
+  Main,
+  Canvas,
   FormContainer,
   FormHeader,
   Row,
