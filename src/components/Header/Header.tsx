@@ -90,7 +90,9 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem key='start'>Start/Edit</MenuItem>
+              <MenuItem key='start' onClick={handleDrawerOpen}>
+                Start/Edit
+              </MenuItem>
               {items.map((item) => (
                 <MenuItem key={item} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center' style={{ textTransform: 'none' }}>

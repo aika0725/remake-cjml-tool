@@ -51,23 +51,29 @@ const Section = styled.section`
 const SectionTitle = styled.div`
   margin-bottom: 20px;
 `
-const FormContainer = styled.div<OpenContext['open']>`
+type FormResize = {
+  open: OpenContext['open']
+  width: number
+}
+
+const FormContainer = styled.div<FormResize>`
   box-sizing: border-box;
-  display: ${(props) => (props.open ? 'flex' : 'none')};
+  display: flex;
   height: 100%;
   width: 50%;
+  margin-left: ${(props) => (props.open ? 0 : -(props.width - 43))}px;
   max-width: 722px;
   background-color: #fafaff;
   border-right: 1px solid #003968;
-  /* position: absolute; */
   left: 0;
   top: 77px;
   padding: 0px 30px;
-  margin-left: 7.5px;
   overflow-y: auto;
+  /* transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(-95%)')}; */
 
   @media (max-width: 566px) {
     width: 100%;
+    margin-left: -${(props) => props.width}px;
   }
 `
 
@@ -101,10 +107,12 @@ const Canvas = styled.div`
   top: 77px;
   margin-top: 7px;
 `
-const Main = styled.div`
+const Main = styled.div<OpenContext['open']>`
   display: flex;
-  height: 100%;
+  height: calc(100vh - 68.5px);
   flex-direction: row;
+  /* transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(-35%)')}; */
+
   @media (max-width: 566px) {
     flex-direction: column;
   }

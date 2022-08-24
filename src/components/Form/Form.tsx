@@ -18,6 +18,9 @@ import CommunicationCard from '../CommunicationCard'
 import DeleteButton from '../DeleteButton/DeleteButton'
 import TouchpointTypeButtons from '../TouchpointTypeButtons/TouchpointTypeButtons'
 import { OpenStatusContext } from '../Context/OpenStatusContext'
+import { useElementSize } from 'usehooks-ts'
+import { FormContext } from '../Context/FormContext'
+import { Value } from 'sass'
 
 const validationSchema = yup.object({
   actors: yup.array().of(
@@ -36,25 +39,24 @@ const validationSchema = yup.object({
   ),
 })
 
-type Width = number | undefined
+// type Width = number | undefined
 
 function Form() {
   const theme = useTheme()
-  const ref = useRef(null)
-  const [width, setWidth] = useState<Width>(0)
-  const { open, setOpen } = React.useContext(OpenStatusContext)
 
-  useLayoutEffect(() => {
-    setWidth(ref?.current?.['offsetWidth'])
-    console.log(width)
-  }, [width])
+  const { open, setOpen } = React.useContext(OpenStatusContext)
+  const [formRef, { width, height }] = useElementSize()
+  console.log(width)
+
+  const { formContextValue, setFormContextValue } = React.useContext(FormContext)
+  console.log(formContextValue)
 
   const handleDrawerClose = () => {
     setOpen(false)
   }
 
   return (
-    <S.FormContainer open={open} ref={ref}>
+    <S.FormContainer open={open} width={width} ref={formRef}>
       <Formik
         initialValues={formInitialValues}
         onSubmit={(values) => {
@@ -64,6 +66,11 @@ function Form() {
       >
         {(formikProps: FormikProps<IFormData>) => {
           console.log(formikProps.values)
+
+          const handleSumbit = () => {
+            setFormContextValue(formikProps.values)
+          }
+
           return (
             <form onSubmit={formikProps.handleSubmit} style={{ width: '100%' }}>
               <S.FormHeader>
@@ -116,7 +123,6 @@ function Form() {
                 <FieldArray
                   name='touchpoints'
                   render={(arrayHelpers) => {
-                    console.log(formikProps.values.touchpoints)
                     return (
                       <div>
                         {formikProps.values.touchpoints.map((touchpoint: ITouchpoint, index) => (
@@ -134,7 +140,13 @@ function Form() {
                   }}
                 />
               </S.Section>
-              <Button color='primary' variant='contained' fullWidth type='submit'>
+              <Button
+                color='primary'
+                variant='contained'
+                fullWidth
+                type='submit'
+                onClick={handleSumbit}
+              >
                 Submit
               </Button>
             </form>

@@ -10,3 +10,5 @@ export enum ActorRoles {
   Attacker = 'attacker',
   System = 'system',
 }
+
+export enum ActorIcons {}
