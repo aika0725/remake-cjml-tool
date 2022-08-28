@@ -20,7 +20,6 @@ import TouchpointTypeButtons from '../TouchpointTypeButtons/TouchpointTypeButton
 import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { useElementSize } from 'usehooks-ts'
 import { FormContext } from '../Context/FormContext'
-import { Value } from 'sass'
 
 const validationSchema = yup.object({
   actors: yup.array().of(

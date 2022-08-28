@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { IActor } from '../../../interfaces/Actor'
-import { ITouchpoint } from '../../../interfaces/Touchpoint'
+import { ITouchpoint, TouchpointType } from '../../../interfaces/Touchpoint'
 import Arrow from '../Arrow/Arrow'
 
 import * as D from '../diagram.style'
@@ -30,7 +30,7 @@ const generateCommunication = (
   //   const senderBoxTop = senderBoxRef?.current?.getBoundingClientRect().top
   //   const receiverBoxTop = receiverBoxRef?.current?.getBoundingClientRect().top
   // let isSenderAbove = true
-  const [isSenderAbove, setIsSenderAbve] = useState(true)
+  const [arrowDirection, setArrowDirection] = useState('up')
   useLayoutEffect(() => {
     const senderBox = senderBoxRef.current as any
     const receiverBox = receiverBoxRef.current as any
@@ -44,7 +44,7 @@ const generateCommunication = (
     // console.log('in effect:' + isSenderAbove)
     console.log('sender:' + senderBox?.getBoundingClientRect().top)
     console.log('receiver:' + receiverBox?.getBoundingClientRect().top)
-  }, [isSenderAbove])
+  }, [arrowDirection])
 
   // const isSenderAbove = () => {
   //   const senderBox = senderBoxRef.current as any
@@ -60,13 +60,13 @@ const generateCommunication = (
 
   // console.log('sender:' + senderBox?.getBoundingClientRect().top)
   // console.log('receiver:' + receiverBox?.getBoundingClientRect().top)
-  console.log('outside:' + isSenderAbove)
+  console.log('outside:' + arrowDirection)
   if (actorName === senderName) {
     return (
       <D.SwimlaneSender ref={senderBoxRef}>
         <D.ChannelImage>{channel}</D.ChannelImage>
         <D.CommunicationContent>{senderDescription}</D.CommunicationContent>
-        {isSenderAbove ? <Arrow direction={'up'} /> : <Arrow direction={'down'} />}
+        <Arrow direction={arrowDirection} />
       </D.SwimlaneSender>
     )
   } else if (actorName === receiverName) {
@@ -83,7 +83,7 @@ const generateCommunication = (
 const Touchpoint = (props: Props) => {
   return (
     <>
-      {props.touchpoint.type === 'action'
+      {props.touchpoint.type === TouchpointType.Action
         ? generateAction(
             props.actor.actorName,
             props.touchpoint.senderName,
