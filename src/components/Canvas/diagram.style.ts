@@ -1,12 +1,7 @@
 import styled from '@emotion/styled'
-import { style } from '@mui/system'
+import TrendingFlatIcon from '@mui/icons-material/TrendingFlat'
+import React from 'react'
 
-// interface ISwimlaneRow {
-//   // eslint-disable-next-line @typescript-eslint/ban-types
-//   children?: React.ReactNode
-// }
-
-// export const SwimlaneRow = styled.div<ISwimlaneRow>`
 export const SwimlaneRow = styled.div`
   background-color: #f2f2f2;
   border: 3px #d8d8d8 solid;
@@ -81,4 +76,86 @@ export const TransparentBox = styled.div`
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+`
+type SwimlaneContentType = {
+  children?: React.ReactNode | JSX.Element | JSX.Element[] | void
+}
+export const SwimlaneSender = styled.div<SwimlaneContentType>`
+  padding: 10px;
+  margin-left: 20px;
+  width: 12rem;
+  height: auto;
+  background-color: #dbeef4;
+  border: 2px #31859c solid;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: flex;
+  font-family: Calibri;
+  font-size: 0.8em;
+  align-items: center;
+  /* justify-content: center; */
+  position: relative;
+`
+export const SwimlaneReceiver = styled.div`
+  padding: 10px;
+  margin-left: 20px;
+  width: 12rem;
+  height: auto;
+  background-color: #ffffff;
+  border: 2px #31859c solid;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: flex;
+  font-family: Calibri;
+  font-size: 0.8em;
+  align-items: center;
+  position: relative;
+`
+export const ChannelImage = styled.div`
+  margin-right: 10px;
+  display: flex;
+  position: absolute;
+  margin: auto;
+  width: 28px;
+  height: auto;
+`
+export const CommunicationContent = styled.div`
+  width: 130px;
+  margin-right: 5px;
+  display: flex;
+  word-wrap: break-word;
+  left: 48px;
+  position: absolute;
+`
+// export const Arrow =styled.div`
+//   position: absolute;
+//   width: 20px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   height: ${(props) => (props.direction ==='up' ? 120 : 46)}px;
+//   margin-left: ${(props) => (props.direction ==='up' ? 80 : 70)}px;
+//   transform:  ${(props) => (props.direction ==='up' ? '' : 'rotate(180deg)')};
+//   margin-bottom: ${(props) => (props.direction ==='up' ? 200 : -100)}px;
+// `
+type ArrowType = {
+  direction: string
+}
+export const ArrowHead: any = styled.div<ArrowType>`
+  position: absolute;
+  top: 66px;
+  left: 6rem;
+  transform: ${(props) => (props.direction === 'up' ? '' : 'rotate(180deg)')};
+`
+
+export const ArrowBody = styled.div`
+  height: 100%;
+  min-height: 13px;
 `

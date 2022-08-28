@@ -124,7 +124,7 @@ const CommunicationCard = (props: Props) => {
               multiline
               mandatory
               id='0'
-              name='touchpoints[0].receiverDescription'
+              name={`touchpoints[${props.index}].receiverDescription`}
               label='Describe the receiver activity within 50 chacters'
               value={values.touchpoints[props.index].receiverDescription}
               handleChange={handleChange}
