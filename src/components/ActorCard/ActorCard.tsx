@@ -15,7 +15,6 @@ type Props = {
 
 const ActorCard = (props: Props) => {
   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
-  console.log(props.name)
   return (
     <S.Row>
       <GenericInputTextField

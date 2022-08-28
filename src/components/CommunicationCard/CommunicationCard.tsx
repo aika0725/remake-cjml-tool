@@ -1,5 +1,5 @@
 import { FormControl, FormLabel, Typography } from '@material-ui/core'
-import { FieldArrayRenderProps, Formik, useFormikContext } from 'formik'
+import { FieldArrayRenderProps, useFormikContext } from 'formik'
 import React from 'react'
 
 import { IFormData } from '../../interfaces/FormData'

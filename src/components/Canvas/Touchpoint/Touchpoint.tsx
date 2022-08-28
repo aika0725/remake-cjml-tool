@@ -46,21 +46,6 @@ const generateCommunication = (
     console.log('receiver:' + receiverBox?.getBoundingClientRect().top)
   }, [arrowDirection])
 
-  // const isSenderAbove = () => {
-  //   const senderBox = senderBoxRef.current as any
-  //   const receiverBox = receiverBoxRef.current as any
-  //   // receiverBox === null ? (return false):true
-  //   if (receiverBox === null) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  //   // return false
-  // }
-
-  // console.log('sender:' + senderBox?.getBoundingClientRect().top)
-  // console.log('receiver:' + receiverBox?.getBoundingClientRect().top)
-  console.log('outside:' + arrowDirection)
   if (actorName === senderName) {
     return (
       <D.SwimlaneSender ref={senderBoxRef}>

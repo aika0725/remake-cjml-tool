@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React from 'react'
 
 import AddIcon from '@mui/icons-material/Add'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -7,7 +7,6 @@ import { Divider, Typography, IconButton, Button } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { FieldArray, Formik, FormikProps } from 'formik'
-import * as yup from 'yup'
 
 import * as S from '../Styles/FormCard'
 import { formInitialValues, IFormData } from '../../interfaces/FormData'
@@ -20,31 +19,13 @@ import TouchpointTypeButtons from '../TouchpointTypeButtons/TouchpointTypeButton
 import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { useElementSize } from 'usehooks-ts'
 import { FormContext } from '../Context/FormContext'
-
-const validationSchema = yup.object({
-  actors: yup.array().of(
-    yup.object({
-      actorName: yup.string().required('Actor name is required'),
-      actorRole: yup.string().required('Actor role is required'),
-    }),
-  ),
-  touchpoints: yup.array().of(
-    yup.object({
-      senderName: yup.string().required('Sender/Initiator name is required'),
-      senderDescription: yup.string().required('Activity description is required'),
-      receiverName: yup.string().required('receiver name is required'),
-      receiverDescription: yup.string().required('Activity description is required'),
-    }),
-  ),
-})
-
-// type Width = number | undefined
+import { validationSchema } from '../validation'
 
 function Form() {
   const theme = useTheme()
 
   const { open, setOpen } = React.useContext(OpenStatusContext)
-  const [formRef, { width, height }] = useElementSize()
+  const [formRef, { width }] = useElementSize()
   console.log(width)
 
   const { formContextValue, setFormContextValue } = React.useContext(FormContext)

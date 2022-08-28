@@ -6,7 +6,6 @@ const Canvas = () => {
   return (
     <>
       <S.Canvas>
-        <div>this is canvas</div>
         <Swimlane />
       </S.Canvas>
     </>
