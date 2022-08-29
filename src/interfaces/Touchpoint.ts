@@ -1,25 +1,29 @@
 export interface ITouchpoint {
+  senderID: number
+  receiverID?: number | undefined
   type: TouchpointType | ''
-  channel?: TouchpoinTChannels | ''
-  senderName: string
-  senderDescription: string
-  senderRiskCategory?: string
-  receiverName?: string
-  receiverDescription?: string
-  receiverRiskCategory?: string
-  time?: Date | null
+  touchpointDescription: {
+    channel?: TouchpoinTChannels | ''
+    senderDescription: string
+    senderRiskCategory?: string
+    receiverDescription?: string
+    receiverRiskCategory?: string
+    time?: Date | null
+  }
 }
 
 export const touchpointInitialValues: ITouchpoint = {
+  senderID: 0,
+  receiverID: undefined,
   type: '',
-  channel: '',
-  senderName: '',
-  senderDescription: '',
-  senderRiskCategory: '',
-  time: null,
-  receiverName: '',
-  receiverDescription: '',
-  receiverRiskCategory: '',
+  touchpointDescription: {
+    channel: '',
+    senderDescription: '',
+    senderRiskCategory: '',
+    time: null,
+    receiverDescription: '',
+    receiverRiskCategory: '',
+  },
 }
 
 export enum TouchpointType {

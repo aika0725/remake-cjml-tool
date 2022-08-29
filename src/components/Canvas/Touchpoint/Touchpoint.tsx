@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { IActor } from '../../../interfaces/Actor'
 import { ITouchpoint, TouchpointType } from '../../../interfaces/Touchpoint'
+import ActionBox from '../ActionBox/ActionBox'
 import Arrow from '../Arrow/Arrow'
+import CommunicationBox from '../CommunicationBox/CommunicationBox'
 
 import * as D from '../diagram.style'
 
@@ -10,78 +12,25 @@ type Props = {
   touchpoint: ITouchpoint
 }
 
-const generateAction = (actorName: string, senderName: string, description: string) => {
-  if (actorName === senderName) {
-    return <D.SwimeLineAction>{description}</D.SwimeLineAction>
-  } else return <D.TransparentBox />
-}
-
-const generateCommunication = (
-  actorName: string,
-  senderName: string,
-  senderDescription: string,
-  receiverName?: string,
-  recieverDescription?: string,
-  channel?: string,
-) => {
-  const senderBoxRef = useRef<HTMLDivElement>(null)
-  const receiverBoxRef = useRef<HTMLDivElement>(null)
-
-  //   const senderBoxTop = senderBoxRef?.current?.getBoundingClientRect().top
-  //   const receiverBoxTop = receiverBoxRef?.current?.getBoundingClientRect().top
-  // let isSenderAbove = true
-  const [arrowDirection, setArrowDirection] = useState('up')
-  useLayoutEffect(() => {
-    const senderBox = senderBoxRef.current as any
-    const receiverBox = receiverBoxRef.current as any
-    // console.log('sender:' + senderBox)
-    // console.log('receiver:' + receiverBox)
-    // if (senderBox === null) {
-    //   setIsSenderAbve(false)
-    // } else {
-    //   setIsSenderAbve(true)
-    // }
-    // console.log('in effect:' + isSenderAbove)
-    console.log('sender:' + senderBox?.getBoundingClientRect().top)
-    console.log('receiver:' + receiverBox?.getBoundingClientRect().top)
-  }, [arrowDirection])
-
-  if (actorName === senderName) {
-    return (
-      <D.SwimlaneSender ref={senderBoxRef}>
-        <D.ChannelImage>{channel}</D.ChannelImage>
-        <D.CommunicationContent>{senderDescription}</D.CommunicationContent>
-        <Arrow direction={arrowDirection} />
-      </D.SwimlaneSender>
-    )
-  } else if (actorName === receiverName) {
-    return (
-      <D.SwimlaneReceiver ref={receiverBoxRef}>
-        <D.ChannelImage>{channel}</D.ChannelImage>
-        <D.CommunicationContent>{recieverDescription}</D.CommunicationContent>
-        {/* {isSenderAbove() ? <Arrow direction={'up'} /> : <Arrow direction={'down'} />} */}
-      </D.SwimlaneReceiver>
-    )
-  } else return <D.TransparentBox />
-}
-
 const Touchpoint = (props: Props) => {
   return (
     <>
-      {props.touchpoint.type === TouchpointType.Action
-        ? generateAction(
-            props.actor.actorName,
-            props.touchpoint.senderName,
-            props.touchpoint.senderDescription,
-          )
-        : generateCommunication(
-            props.actor.actorName,
-            props.touchpoint.senderName,
-            props.touchpoint.senderDescription,
-            props.touchpoint.receiverName,
-            props.touchpoint.receiverDescription,
-            props.touchpoint.channel,
-          )}
+      {props.touchpoint.type === TouchpointType.Action ? (
+        <ActionBox
+          actorID={props.actor.id}
+          senderID={props.touchpoint.senderID}
+          description={props.touchpoint.touchpointDescription.senderDescription}
+        />
+      ) : (
+        <CommunicationBox
+          actorID={props.actor.id}
+          senderID={props.touchpoint.senderID}
+          senderDescription={props.touchpoint.touchpointDescription.senderDescription}
+          receiverID={props.touchpoint.receiverID}
+          recieverDescription={props.touchpoint.touchpointDescription.receiverDescription}
+          channel={props.touchpoint.touchpointDescription.channel}
+        />
+      )}
     </>
   )
 }

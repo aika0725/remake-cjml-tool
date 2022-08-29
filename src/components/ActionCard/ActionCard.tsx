@@ -39,7 +39,7 @@ const ActionCard = (props: Props) => {
                   *
                 </S.BlacLabelTextTypography>
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].senderName`} />
+              <ActorRadios name={`touchpoints[${props.index}].senderID`} />
             </FormControl>
           </S.Row>
           <S.Row>
@@ -47,24 +47,28 @@ const ActionCard = (props: Props) => {
               multiline
               mandatory
               id='0'
-              name={`touchpoints[${props.index}].senderDescription`}
+              name={`touchpoints[${props.index}].touchpointDescription.senderDescription`}
               label='Action description'
-              value={values.touchpoints[props.index].senderDescription}
+              value={values.touchpoints[props.index].touchpointDescription.senderDescription}
               handleChange={handleChange}
               error={
                 touched.touchpoints &&
                 Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.senderDescription,
+                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                    .senderDescription,
                 )
               }
               helperText={
                 touched.touchpoints &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.senderDescription
+                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                  .senderDescription
               }
             />
           </S.Row>
           <S.Row>
-            <SecurityRadios name={`touchpoints[${props.index}].senderRiskCategory`} />
+            <SecurityRadios
+              name={`touchpoints[${props.index}].touchpointDescription.senderRiskCategory`}
+            />
           </S.Row>
         </S.FormCard>
       </ThemeProvider>

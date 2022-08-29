@@ -7,10 +7,11 @@ import { useFormikContext } from 'formik'
 
 type Props = {
   name: string
+  // id:number
 }
 
 const ActorRadios = (props: Props) => {
-  const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
+  const { values, handleChange } = useFormikContext<IFormData>()
 
   return (
     <RadioGroup row name={props.name} onChange={handleChange}>
@@ -18,7 +19,7 @@ const ActorRadios = (props: Props) => {
         return (
           <FormControlLabel
             key={index}
-            value={actor.actorName}
+            value={actor.id}
             control={<Radio />}
             label={`${actor.actorName}`}
           />

@@ -29,6 +29,8 @@ const FormContent = () => {
   const handleDrawerClose = () => {
     setOpen(false)
   }
+  const uid = Math.floor(100000 + Math.random() * 900000)
+  console.log(values)
   return (
     <S.FormContainer open={open} width={width} ref={formRef}>
       <form onSubmit={handleSubmit} style={{ width: '100%' }}>
@@ -64,7 +66,7 @@ const FormContent = () => {
                   <Button
                     variant='outlined'
                     startIcon={<AddIcon />}
-                    onClick={() => arrayHelpers.push({ id: 0, actorName: '', actorRole: '' })}
+                    onClick={() => arrayHelpers.push({ id: uid, actorName: '', actorRole: '' })}
                   >
                     New actor
                   </Button>

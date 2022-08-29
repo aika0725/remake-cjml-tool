@@ -17,7 +17,6 @@ type Props = {
 }
 
 const GenericInputTextField = (props: Props) => {
-  //   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
   return (
     <TextField
       fullWidth

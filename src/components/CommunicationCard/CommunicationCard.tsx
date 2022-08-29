@@ -25,9 +25,8 @@ const CommunicationCard = (props: Props) => {
   const [date, setDate] = React.useState<Date | null>(null)
 
   const handleChangeDate = (newDate: Date | null) => {
-    console.log('time picker')
     setDate(newDate)
-    setFieldValue(`touchpoints[${props.index}].time`, date)
+    setFieldValue(`touchpoints[${props.index}].touchpointDescription.time`, date)
   }
   return (
     <div>
@@ -45,27 +44,29 @@ const CommunicationCard = (props: Props) => {
                   <Typography variant='button'>sender</Typography>*
                 </S.BlacLabelTextTypography>
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].senderName`} />
+              <ActorRadios name={`touchpoints[${props.index}].senderID`} />
             </FormControl>
           </S.Row>
           <S.Row>
             <GenericInputTextField
               mandatory
               id='0'
-              name={`touchpoints[${props.index}].senderDescription`}
+              name={`touchpoints[${props.index}].touchpointDescription.senderDescription`}
               label='Describe sender activity within 50 characters'
-              value={values.touchpoints[props.index].senderDescription}
+              value={values.touchpoints[props.index].touchpointDescription.senderDescription}
               handleChange={handleChange}
               multiline
               error={
                 touched.touchpoints &&
                 Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.senderDescription,
+                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                    .senderDescription,
                 )
               }
               helperText={
                 touched.touchpoints &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.senderDescription
+                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                  .senderDescription
               }
             />
           </S.Row>
@@ -73,21 +74,23 @@ const CommunicationCard = (props: Props) => {
             <GenericInputTextField
               mandatory
               id='0'
-              name={`touchpoints[${props.index}].channel`}
+              name={`touchpoints[${props.index}].touchpointDescription.channel`}
               select
               label='Communication channel'
-              value={values.touchpoints[props.index].channel}
+              value={values.touchpoints[props.index].touchpointDescription.channel}
               handleChange={handleChange}
               error={
                 // Need to check why this needs type conversion o unknown
                 touched.actors &&
                 Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.senderDescription,
+                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                    .senderDescription,
                 )
               }
               helperText={
                 touched.actors &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.senderDescription
+                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                  .senderDescription
               }
             >
               <MenuItem value={TouchpoinTChannels.SMS}>SMS</MenuItem>
@@ -101,13 +104,20 @@ const CommunicationCard = (props: Props) => {
                 value={date}
                 onChange={handleChangeDate}
                 renderInput={(params: any) => {
-                  return <TextField name={`touchpoints[${props.index}].time`} {...params} />
+                  return (
+                    <TextField
+                      name={`touchpoints[${props.index}].touchpointDescription.time`}
+                      {...params}
+                    />
+                  )
                 }}
               />
             </LocalizationProvider>
           </S.Row>
           <S.Row>
-            <SecurityRadios name={`touchpoints[${props.index}].senderRiskCategory`} />
+            <SecurityRadios
+              name={`touchpoints[${props.index}].touchpointDescription.senderRiskCategory`}
+            />
           </S.Row>
           <S.Row>
             <FormControl>
@@ -116,7 +126,7 @@ const CommunicationCard = (props: Props) => {
                   Choose the <Typography variant='button'>Receiver</Typography>*
                 </S.BlacLabelTextTypography>
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].receiverName`} />
+              <ActorRadios name={`touchpoints[${props.index}].receiverID`} />
             </FormControl>
           </S.Row>
           <S.Row>
@@ -124,24 +134,28 @@ const CommunicationCard = (props: Props) => {
               multiline
               mandatory
               id='0'
-              name={`touchpoints[${props.index}].receiverDescription`}
+              name={`touchpoints[${props.index}].touchpointDescription.receiverDescription`}
               label='Describe the receiver activity within 50 chacters'
-              value={values.touchpoints[props.index].receiverDescription}
+              value={values.touchpoints[props.index].touchpointDescription.receiverDescription}
               handleChange={handleChange}
               error={
                 touched.touchpoints &&
                 Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.receiverDescription,
+                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                    .receiverDescription,
                 )
               }
               helperText={
                 touched.touchpoints &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.receiverDescription
+                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+                  .receiverDescription
               }
             />
           </S.Row>
           <S.Row>
-            <SecurityRadios name={`touchpoints[${props.index}].receiverRiskCategory`} />
+            <SecurityRadios
+              name={`touchpoints[${props.index}].touchpointDescription.receiverRiskCategory`}
+            />
           </S.Row>
         </S.FormCard>
       </ThemeProvider>
