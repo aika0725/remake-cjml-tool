@@ -1,9 +1,10 @@
 import { IActor } from './Actor'
-import { ITouchpoint } from './Touchpoint'
+import { IAction, ICommunication } from './Touchpoint'
 
 export interface IFormData {
   actors: IActor[]
-  touchpoints: ITouchpoint[]
+  // touchpoints: (IAction | ICommunication)[]
+  touchpoints: Array<IAction | ICommunication>
 }
 
 export const formInitialValues: IFormData = {

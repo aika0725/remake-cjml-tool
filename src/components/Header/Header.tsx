@@ -18,15 +18,12 @@ const items = ['Export diagram as Image', 'Export diagram as XML', 'User Guide']
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const { open, setOpen } = useContext(OpenStatusContext)
+  const { setOpen } = useContext(OpenStatusContext)
 
   const handleDrawerOpen = () => {
     setOpen(true)
   }
 
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }

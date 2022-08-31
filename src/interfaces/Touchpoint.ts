@@ -1,9 +1,21 @@
 export interface ITouchpoint {
-  senderID: number
-  receiverID?: number | undefined
   type: TouchpointType | ''
+}
+
+export interface IAction extends ITouchpoint {
+  initiatorID: string
   touchpointDescription: {
-    channel?: TouchpoinTChannels | ''
+    actionDescription: string
+    RiskCategory?: string
+    time?: Date | null
+  }
+}
+
+export interface ICommunication extends ITouchpoint {
+  senderID: string
+  receiverID: string
+  touchpointDescription: {
+    channel: TouchpoinTChannels | ''
     senderDescription: string
     senderRiskCategory?: string
     receiverDescription?: string
@@ -12,17 +24,37 @@ export interface ITouchpoint {
   }
 }
 
-export const touchpointInitialValues: ITouchpoint = {
-  senderID: 0,
-  receiverID: undefined,
+// export const touchpointInitialValues: IAction | ICommunication = {
+//   type: '',
+//   initiatorID: '',
+//   touchpointDescription: {
+//     actionDescription:'',
+//     RiskCategory?: '',
+//     time?: null,
+//   }
+// }
+
+export const actionInitialvalues: IAction = {
   type: '',
+  initiatorID: '',
+  touchpointDescription: {
+    actionDescription: '',
+    RiskCategory: '',
+    time: null,
+  },
+}
+
+export const communicationInitialvalues: ICommunication = {
+  type: '',
+  senderID: '',
+  receiverID: '',
   touchpointDescription: {
     channel: '',
     senderDescription: '',
     senderRiskCategory: '',
-    time: null,
     receiverDescription: '',
     receiverRiskCategory: '',
+    time: null,
   },
 }
 

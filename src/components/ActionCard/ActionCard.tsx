@@ -19,7 +19,7 @@ type Props = {
 
 const ActionCard = (props: Props) => {
   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
-
+  console.log(values.touchpoints[props.index].touchpointDescription)
   return (
     <div>
       <ThemeProvider theme={S.FontTheme}>
@@ -36,10 +36,9 @@ const ActionCard = (props: Props) => {
                   <Typography variant='button' fontWeight={600}>
                     initiator
                   </Typography>
-                  *
                 </S.BlacLabelTextTypography>
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].senderID`} />
+              <ActorRadios name={`touchpoints[${props.index}].initiatorID`} />
             </FormControl>
           </S.Row>
           <S.Row>
@@ -47,22 +46,22 @@ const ActionCard = (props: Props) => {
               multiline
               mandatory
               id='0'
-              name={`touchpoints[${props.index}].touchpointDescription.senderDescription`}
+              name={`touchpoints[${props.index}].touchpointDescription.actionDescription`}
               label='Action description'
-              value={values.touchpoints[props.index].touchpointDescription.senderDescription}
+              value={values.touchpoints[props.index].touchpointDescription.actionDescription}
               handleChange={handleChange}
-              error={
-                touched.touchpoints &&
-                Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                    .senderDescription,
-                )
-              }
-              helperText={
-                touched.touchpoints &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                  .senderDescription
-              }
+              // error={
+              //   touched.touchpoints &&
+              //   Boolean(
+              //     (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+              //       .actionDescription,
+              //   )
+              // }
+              // helperText={
+              //   touched.touchpoints &&
+              //   (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
+              //     .senderDescription
+              // }
             />
           </S.Row>
           <S.Row>

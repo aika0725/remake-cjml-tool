@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { OpenStatusContext, OpenContext } from './components/Context/OpenStatusContext'
 import Canvas from './components/Canvas/Canvas'
 
 import Header from './components/Header/Header'
 import { Main } from './components/Styles/FormCard'
 
-import { formInitialValues } from './interfaces/FormData'
-import { Formik } from 'formik'
+import { formInitialValues, IFormData } from './interfaces/FormData'
+import { Formik, useFormik, useFormikContext } from 'formik'
 import { validationSchema } from './components/validation'
 import FormContent from './components/Form/FormContent'
+import debounce from 'lodash/debounce'
 
 function App() {
   const [open, setOpen] = React.useState<OpenContext['open']>(true)
@@ -25,11 +26,11 @@ function App() {
               alert(JSON.stringify(values, null, 2))
             }}
             validationSchema={validationSchema}
+            validateOnChange={false}
           >
-            {/* <Form /> */}
             <>
               <FormContent />
-              <Canvas />
+              {/* <Canvas /> */}
             </>
           </Formik>
         </Main>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import AddIcon from '@mui/icons-material/Add'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -10,7 +10,7 @@ import { FieldArray, useFormikContext } from 'formik'
 
 import * as S from '../Styles/FormCard'
 import { IFormData } from '../../interfaces/FormData'
-import { ITouchpoint, TouchpointType } from '../../interfaces/Touchpoint'
+import { IAction, ICommunication, ITouchpoint, TouchpointType } from '../../interfaces/Touchpoint'
 import ActionCard from '../ActionCard'
 import ActorCard from '../ActorCard/ActorCard'
 import CommunicationCard from '../CommunicationCard'
@@ -19,9 +19,18 @@ import TouchpointTypeButtons from '../TouchpointTypeButtons/TouchpointTypeButton
 import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { useElementSize } from 'usehooks-ts'
 
+import debounce from 'lodash/debounce'
+
 const FormContent = () => {
   const theme = useTheme()
-  const { values, handleSubmit } = useFormikContext<IFormData>()
+  const { values, handleSubmit, validateForm } = useFormikContext<IFormData>()
+
+  const debouncedValidate = useMemo(() => debounce(validateForm, 500), [validateForm])
+
+  useEffect(() => {
+    console.log('calling deboucedValidate')
+    debouncedValidate(values)
+  }, [values, debouncedValidate])
 
   const { open, setOpen } = React.useContext(OpenStatusContext)
   const [formRef, { width }] = useElementSize()
@@ -29,11 +38,22 @@ const FormContent = () => {
   const handleDrawerClose = () => {
     setOpen(false)
   }
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    handleSubmit()
+  }
+
   const uid = Math.floor(100000 + Math.random() * 900000)
   console.log(values)
   return (
     <S.FormContainer open={open} width={width} ref={formRef}>
-      <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+      <form
+        onSubmit={(e) => {
+          handleFormSubmit(e)
+        }}
+        style={{ width: '100%' }}
+      >
         <S.FormHeader>
           <S.CJMLFormHeaderTypography>Create a CJML diagram</S.CJMLFormHeaderTypography>
           <IconButton onClick={handleDrawerClose}>
@@ -83,8 +103,8 @@ const FormContent = () => {
             name='touchpoints'
             render={(arrayHelpers) => {
               return (
-                <div>
-                  {values.touchpoints.map((touchpoint: ITouchpoint, index) => (
+                <>
+                  {values.touchpoints.map((touchpoint: IAction | ICommunication, index) => (
                     <div key={index}>
                       {touchpoint.type === TouchpointType.Action ? (
                         <ActionCard index={index} arrayHelpers={arrayHelpers} />
@@ -94,7 +114,7 @@ const FormContent = () => {
                     </div>
                   ))}
                   <TouchpointTypeButtons arrayHelpers={arrayHelpers} />
-                </div>
+                </>
               )
             }}
           />

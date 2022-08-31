@@ -21,7 +21,8 @@ type Props = {
 }
 
 const CommunicationCard = (props: Props) => {
-  const { values, handleChange, touched, errors, setFieldValue } = useFormikContext<IFormData>()
+  const { values, handleChange, touched, errors, setFieldValue, handleBlur } =
+    useFormikContext<IFormData>()
   const [date, setDate] = React.useState<Date | null>(null)
 
   const handleChangeDate = (newDate: Date | null) => {

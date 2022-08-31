@@ -7,6 +7,8 @@ type Props = {
   label: string
   value: string | undefined
   handleChange: (e: string | ChangeEvent<any>) => void
+  // handleBlur: (e: string | ChangeEvent<any>) => void
+
   error: boolean | undefined
   helperText: string | undefined
   mandatory?: boolean
