@@ -18,7 +18,7 @@ export interface ICommunication extends ITouchpoint {
     channel: TouchpoinTChannels | ''
     senderDescription: string
     senderRiskCategory?: string
-    receiverDescription?: string
+    receiverDescription: string
     receiverRiskCategory?: string
     time?: Date | null
   }

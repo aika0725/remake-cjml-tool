@@ -9,7 +9,6 @@ import { formInitialValues, IFormData } from './interfaces/FormData'
 import { Formik, useFormik, useFormikContext } from 'formik'
 import { validationSchema } from './components/validation'
 import FormContent from './components/Form/FormContent'
-import debounce from 'lodash/debounce'
 
 function App() {
   const [open, setOpen] = React.useState<OpenContext['open']>(true)
@@ -27,10 +26,11 @@ function App() {
             }}
             validationSchema={validationSchema}
             validateOnChange={false}
+            validateOnBlur={false}
           >
             <>
               <FormContent />
-              {/* <Canvas /> */}
+              <Canvas />
             </>
           </Formik>
         </Main>

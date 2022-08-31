@@ -3,7 +3,7 @@ import React from 'react'
 import { IFormData } from '../../../interfaces/FormData'
 import ActorInfo from '../ActorInfo/ActorInfo'
 import * as D from '../diagram.style'
-import Touchpoint from '../Touchpoint/Touchpoint'
+import TouchpointInfo from '../TouchpointInfo'
 
 const Swimlane = () => {
   const { values } = useFormikContext<IFormData>()
@@ -15,7 +15,7 @@ const Swimlane = () => {
           <D.SwimlaneRow key={index}>
             <ActorInfo actor={actor} />
             {values.touchpoints.map((touchpoint, index) => {
-              return <Touchpoint key={index} actor={actor} touchpoint={touchpoint} />
+              return <TouchpointInfo key={index} actor={actor} touchpoint={touchpoint} />
             })}
           </D.SwimlaneRow>
         )

@@ -5,11 +5,12 @@ import * as D from '../diagram.style'
 
 type Props = {
   direction: string
+  length: string
 }
 
 const Arrow = (props: Props) => (
   <>
-    <D.ArrowHead direction={props.direction}>
+    <D.ArrowHead direction={props.direction} length={props.length}>
       <ArrowHead />
     </D.ArrowHead>
     <ArrowBody />

@@ -1,14 +1,17 @@
+import { useFormikContext } from 'formik'
 import React from 'react'
+import { IFormData } from '../../../interfaces/FormData'
+import Arrow from '../Arrow/Arrow'
 
 import * as D from '../diagram.style'
 
 type Props = {
-  actorID: number
-  senderID: number | undefined
-  receiverID: number | undefined
+  actorID: string
+  senderID: string
+  receiverID: string
   senderDescription: string
-  recieverDescription?: string
-  channel?: string
+  recieverDescription: string
+  channel: string
 }
 
 const CommunicationBox = ({
@@ -19,12 +22,23 @@ const CommunicationBox = ({
   recieverDescription,
   channel,
 }: Props) => {
+  const { values } = useFormikContext<IFormData>()
+
+  const boxesDirectionDistance = () => {
+    const indexSender = values.actors.map((actor) => actor.id).indexOf(senderID)
+    const indexReceiver = values.actors.map((actor) => actor.id).indexOf(receiverID)
+    if (indexSender < indexReceiver) {
+      return ['down', (indexReceiver - indexSender).toString()]
+    } else {
+      return ['up', (indexSender - indexReceiver).toString()]
+    }
+  }
   if (actorID === senderID) {
     return (
       <D.SwimlaneSender>
         <D.ChannelImage>{channel}</D.ChannelImage>
         <D.CommunicationContent>{senderDescription}</D.CommunicationContent>
-        {/* <Arrow direction={arrowDirection} /> */}
+        <Arrow direction={boxesDirectionDistance()[0]} length={boxesDirectionDistance()[1]} />
       </D.SwimlaneSender>
     )
   } else if (actorID === receiverID) {
@@ -32,7 +46,6 @@ const CommunicationBox = ({
       <D.SwimlaneReceiver>
         <D.ChannelImage>{channel}</D.ChannelImage>
         <D.CommunicationContent>{recieverDescription}</D.CommunicationContent>
-        {/* {isSenderAbove() ? <Arrow direction={'up'} /> : <Arrow direction={'down'} />} */}
       </D.SwimlaneReceiver>
     )
   } else return <D.TransparentBox />

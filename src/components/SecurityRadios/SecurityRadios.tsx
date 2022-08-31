@@ -12,7 +12,7 @@ type Props = {
 }
 
 const SecurityRadios = (props: Props) => {
-  const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
+  const { handleChange } = useFormikContext<IFormData>()
 
   return (
     <FormControl>

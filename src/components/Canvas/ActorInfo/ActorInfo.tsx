@@ -1,9 +1,6 @@
-import { useFormikContext } from 'formik'
-import { type } from 'os'
 import React from 'react'
 import { IActor } from '../../../interfaces/Actor'
-import { IFormData } from '../../../interfaces/FormData'
-import { FormContext } from '../../Context/FormContext'
+
 import * as D from '../diagram.style'
 
 type Props = {

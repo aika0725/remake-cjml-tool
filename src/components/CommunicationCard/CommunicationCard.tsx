@@ -5,7 +5,7 @@ import React from 'react'
 import { IFormData } from '../../interfaces/FormData'
 import ActorRadios from '../ActorRadios/ActorRadios'
 import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
-import SecurityRadios from '../SecurityRadios/SecurityRadios'
+import SecurityRadios from '../SecurityRadios'
 
 import * as S from '../Styles/FormCard'
 import DeleteButton from '../DeleteButton/DeleteButton'

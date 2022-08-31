@@ -147,10 +147,11 @@ export const CommunicationContent = styled.div`
 // `
 type ArrowType = {
   direction: string
+  length: string
 }
 export const ArrowHead: any = styled.div<ArrowType>`
   position: absolute;
-  top: 66px;
+  top: ${(props) => (props.direction === 'up' ? '66px' : '110px')};
   left: 6rem;
   transform: ${(props) => (props.direction === 'up' ? '' : 'rotate(180deg)')};
 `

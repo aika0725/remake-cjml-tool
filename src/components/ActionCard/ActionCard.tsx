@@ -7,7 +7,7 @@ import { FieldArrayRenderProps, useFormikContext } from 'formik'
 import { ThemeProvider, Typography } from '@mui/material'
 
 import ActorRadios from '../ActorRadios/ActorRadios'
-import SecurityRadios from '../SecurityRadios/SecurityRadios'
+import SecurityRadios from '../SecurityRadios'
 import * as S from '../Styles/FormCard'
 import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
 import DeleteButton from '../DeleteButton/DeleteButton'

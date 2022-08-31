@@ -1,5 +1,5 @@
 export interface IActor {
-  id: number
+  id: string
   actorName: string
   actorRole: ActorRoles | ''
 }
