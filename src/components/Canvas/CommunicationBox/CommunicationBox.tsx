@@ -14,6 +14,16 @@ type Props = {
   channel: string
 }
 
+export enum ArrowDirection {
+  Down = 'down',
+  Up = 'up',
+}
+
+export interface ArrowInfo {
+  direction: ArrowDirection
+  length: string
+}
+
 const CommunicationBox = ({
   actorID,
   senderID,
@@ -24,21 +34,30 @@ const CommunicationBox = ({
 }: Props) => {
   const { values } = useFormikContext<IFormData>()
 
-  const boxesDirectionDistance = () => {
+  const arrowPosition = (): ArrowInfo => {
     const indexSender = values.actors.map((actor) => actor.id).indexOf(senderID)
     const indexReceiver = values.actors.map((actor) => actor.id).indexOf(receiverID)
-    if (indexSender < indexReceiver) {
-      return ['down', (indexReceiver - indexSender).toString()]
-    } else {
-      return ['up', (indexSender - indexReceiver).toString()]
+
+    const arrowDirection: ArrowDirection =
+      indexSender - indexReceiver < 0 ? ArrowDirection.Down : ArrowDirection.Up
+
+    const arrowLength =
+      arrowDirection === ArrowDirection.Up
+        ? (indexSender - indexReceiver).toString()
+        : (indexReceiver - indexSender).toString()
+
+    return {
+      direction: arrowDirection,
+      length: arrowLength,
     }
   }
+
   if (actorID === senderID) {
     return (
       <D.SwimlaneSender>
         <D.ChannelImage>{channel}</D.ChannelImage>
         <D.CommunicationContent>{senderDescription}</D.CommunicationContent>
-        <Arrow direction={boxesDirectionDistance()[0]} length={boxesDirectionDistance()[1]} />
+        <Arrow direction={arrowPosition().direction} length={arrowPosition().length} />
       </D.SwimlaneSender>
     )
   } else if (actorID === receiverID) {

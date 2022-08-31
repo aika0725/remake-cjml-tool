@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat'
 import React from 'react'
+import { ArrowInfo } from './CommunicationBox/CommunicationBox'
 
 export const SwimlaneRow = styled.div`
   background-color: #f2f2f2;
@@ -145,13 +146,13 @@ export const CommunicationContent = styled.div`
 //   transform:  ${(props) => (props.direction ==='up' ? '' : 'rotate(180deg)')};
 //   margin-bottom: ${(props) => (props.direction ==='up' ? 200 : -100)}px;
 // `
-type ArrowType = {
-  direction: string
-  length: string
-}
-export const ArrowHead: any = styled.div<ArrowType>`
+// type ArrowType = {
+//   direction: string
+//   length: string
+// }
+export const ArrowHead: any = styled.div<ArrowInfo>`
   position: absolute;
-  top: ${(props) => (props.direction === 'up' ? '66px' : '110px')};
+  top: ${(props) => (props.direction === 'up' ? '66px' : 80 + 125 + 125 + 'px')};
   left: 6rem;
   transform: ${(props) => (props.direction === 'up' ? '' : 'rotate(180deg)')};
 `
