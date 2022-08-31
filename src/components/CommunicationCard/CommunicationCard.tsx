@@ -10,7 +10,7 @@ import SecurityRadios from '../SecurityRadios/SecurityRadios'
 import * as S from '../Styles/FormCard'
 import DeleteButton from '../DeleteButton/DeleteButton'
 import { MenuItem, TextField, ThemeProvider } from '@mui/material'
-import { TouchpoinTChannels } from '../../interfaces/Touchpoint'
+import { ICommunication, TouchpoinTChannels } from '../../interfaces/Touchpoint'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
@@ -21,13 +21,18 @@ type Props = {
 }
 
 const CommunicationCard = (props: Props) => {
-  const { values, handleChange, touched, errors, setFieldValue, handleBlur } =
-    useFormikContext<IFormData>()
+  const { values, handleChange, touched, errors, setFieldValue } = useFormikContext<IFormData>()
   const [date, setDate] = React.useState<Date | null>(null)
-
   const handleChangeDate = (newDate: Date | null) => {
     setDate(newDate)
     setFieldValue(`touchpoints[${props.index}].touchpointDescription.time`, date)
+  }
+  const touchpointCommunication = values.touchpoints[props.index] as unknown as ICommunication
+  const error = () => {
+    const touchpointError = (errors as unknown as IFormData).touchpoints?.[
+      props.index
+    ] as ICommunication
+    return touchpointError
   }
   return (
     <div>
@@ -54,21 +59,13 @@ const CommunicationCard = (props: Props) => {
               id='0'
               name={`touchpoints[${props.index}].touchpointDescription.senderDescription`}
               label='Describe sender activity within 50 characters'
-              value={values.touchpoints[props.index].touchpointDescription.senderDescription}
+              value={touchpointCommunication.touchpointDescription.senderDescription}
               handleChange={handleChange}
               multiline
               error={
-                touched.touchpoints &&
-                Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                    .senderDescription,
-                )
+                touched.touchpoints && Boolean(error().touchpointDescription.senderDescription)
               }
-              helperText={
-                touched.touchpoints &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                  .senderDescription
-              }
+              helperText={touched.touchpoints && error().touchpointDescription.senderDescription}
             />
           </S.Row>
           <S.Row>
@@ -78,21 +75,13 @@ const CommunicationCard = (props: Props) => {
               name={`touchpoints[${props.index}].touchpointDescription.channel`}
               select
               label='Communication channel'
-              value={values.touchpoints[props.index].touchpointDescription.channel}
+              value={touchpointCommunication.touchpointDescription.channel}
               handleChange={handleChange}
               error={
                 // Need to check why this needs type conversion o unknown
-                touched.actors &&
-                Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                    .senderDescription,
-                )
+                touched.actors && Boolean(error().touchpointDescription.senderDescription)
               }
-              helperText={
-                touched.actors &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                  .senderDescription
-              }
+              helperText={touched.actors && error().touchpointDescription.senderDescription}
             >
               <MenuItem value={TouchpoinTChannels.SMS}>SMS</MenuItem>
               <MenuItem value={TouchpoinTChannels.Email}>Email</MenuItem>
@@ -137,20 +126,12 @@ const CommunicationCard = (props: Props) => {
               id='0'
               name={`touchpoints[${props.index}].touchpointDescription.receiverDescription`}
               label='Describe the receiver activity within 50 chacters'
-              value={values.touchpoints[props.index].touchpointDescription.receiverDescription}
+              value={touchpointCommunication.touchpointDescription.receiverDescription}
               handleChange={handleChange}
               error={
-                touched.touchpoints &&
-                Boolean(
-                  (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                    .receiverDescription,
-                )
+                touched.touchpoints && Boolean(error().touchpointDescription.receiverDescription)
               }
-              helperText={
-                touched.touchpoints &&
-                (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-                  .receiverDescription
-              }
+              helperText={touched.touchpoints && error().touchpointDescription.receiverDescription}
             />
           </S.Row>
           <S.Row>

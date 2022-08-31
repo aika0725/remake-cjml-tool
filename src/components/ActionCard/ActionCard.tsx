@@ -11,6 +11,7 @@ import SecurityRadios from '../SecurityRadios/SecurityRadios'
 import * as S from '../Styles/FormCard'
 import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
 import DeleteButton from '../DeleteButton/DeleteButton'
+import { IAction } from '../../interfaces/Touchpoint'
 
 type Props = {
   index: number
@@ -19,7 +20,11 @@ type Props = {
 
 const ActionCard = (props: Props) => {
   const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
-  console.log(values.touchpoints[props.index].touchpointDescription)
+  const touchpointAction = values.touchpoints[props.index] as unknown as IAction
+  const error = () => {
+    const touchpointError = (errors as unknown as IFormData).touchpoints?.[props.index] as IAction
+    return touchpointError
+  }
   return (
     <div>
       <ThemeProvider theme={S.FontTheme}>
@@ -48,20 +53,12 @@ const ActionCard = (props: Props) => {
               id='0'
               name={`touchpoints[${props.index}].touchpointDescription.actionDescription`}
               label='Action description'
-              value={values.touchpoints[props.index].touchpointDescription.actionDescription}
+              value={touchpointAction.touchpointDescription.actionDescription}
               handleChange={handleChange}
-              // error={
-              //   touched.touchpoints &&
-              //   Boolean(
-              //     (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-              //       .actionDescription,
-              //   )
-              // }
-              // helperText={
-              //   touched.touchpoints &&
-              //   (errors as unknown as IFormData).touchpoints?.[props.index]?.touchpointDescription
-              //     .senderDescription
-              // }
+              error={
+                touched.touchpoints && Boolean(error().touchpointDescription.actionDescription)
+              }
+              helperText={touched.touchpoints && error().touchpointDescription.actionDescription}
             />
           </S.Row>
           <S.Row>
