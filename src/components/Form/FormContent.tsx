@@ -10,7 +10,7 @@ import { FieldArray, useFormikContext } from 'formik'
 
 import * as S from '../Styles/FormCard'
 import { IFormData } from '../../interfaces/FormData'
-import { IAction, ICommunication, ITouchpoint, TouchpointType } from '../../interfaces/Touchpoint'
+import { IAction, ICommunication, TouchpointType } from '../../interfaces/Touchpoint'
 import ActionCard from '../ActionCard'
 import ActorCard from '../ActorCard/ActorCard'
 import CommunicationCard from '../CommunicationCard'
@@ -67,32 +67,30 @@ const FormContent = () => {
           </S.SectionTitle>
           <FieldArray
             name='actors'
-            render={(arrayHelpers) => {
-              return (
-                <>
-                  {values.actors.map((actor, index) => (
-                    <S.FormCard key={index}>
-                      <S.CardHeader>
-                        <Typography variant='h6'>Actor #{index + 1}</Typography>
-                        <DeleteButton arrayHelpers={arrayHelpers} index={index} />
-                      </S.CardHeader>
-                      <ActorCard
-                        name={`actors[${index}].actorName`}
-                        role={`actors[${index}].actorRole`}
-                        index={index}
-                      />
-                    </S.FormCard>
-                  ))}
-                  <Button
-                    variant='outlined'
-                    startIcon={<AddIcon />}
-                    onClick={() => arrayHelpers.push({ id: uid, actorName: '', actorRole: '' })}
-                  >
-                    New actor
-                  </Button>
-                </>
-              )
-            }}
+            render={(arrayHelpers) => (
+              <>
+                {values.actors.map((_, index) => (
+                  <S.FormCard key={index}>
+                    <S.CardHeader>
+                      <Typography variant='h6'>Actor #{index + 1}</Typography>
+                      <DeleteButton arrayHelpers={arrayHelpers} index={index} />
+                    </S.CardHeader>
+                    <ActorCard
+                      name={`actors[${index}].actorName`}
+                      role={`actors[${index}].actorRole`}
+                      index={index}
+                    />
+                  </S.FormCard>
+                ))}
+                <Button
+                  variant='outlined'
+                  startIcon={<AddIcon />}
+                  onClick={() => arrayHelpers.push({ id: uid, actorName: '', actorRole: '' })}
+                >
+                  New actor
+                </Button>
+              </>
+            )}
           />
         </S.Section>
         <S.Section>
@@ -101,22 +99,20 @@ const FormContent = () => {
           </S.SectionTitle>
           <FieldArray
             name='touchpoints'
-            render={(arrayHelpers) => {
-              return (
-                <>
-                  {values.touchpoints.map((touchpoint: IAction | ICommunication, index) => (
-                    <div key={index}>
-                      {touchpoint.type === TouchpointType.Action ? (
-                        <ActionCard index={index} arrayHelpers={arrayHelpers} />
-                      ) : (
-                        <CommunicationCard index={index} arrayHelpers={arrayHelpers} />
-                      )}
-                    </div>
-                  ))}
-                  <TouchpointTypeButtons arrayHelpers={arrayHelpers} />
-                </>
-              )
-            }}
+            render={(arrayHelpers) => (
+              <>
+                {values.touchpoints.map((touchpoint: IAction | ICommunication, index) => (
+                  <div key={index}>
+                    {touchpoint.type === TouchpointType.Action ? (
+                      <ActionCard index={index} arrayHelpers={arrayHelpers} />
+                    ) : (
+                      <CommunicationCard index={index} arrayHelpers={arrayHelpers} />
+                    )}
+                  </div>
+                ))}
+                <TouchpointTypeButtons arrayHelpers={arrayHelpers} />
+              </>
+            )}
           />
         </S.Section>
         <Button color='primary' variant='contained' fullWidth type='submit'>

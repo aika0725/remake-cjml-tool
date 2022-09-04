@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 import * as D from '../diagram.style'
@@ -11,8 +12,12 @@ type Props = {
 const ActionBox = ({ actorID, initiatorID, description }: Props) => {
   console.log(initiatorID === actorID)
   if (actorID === initiatorID) {
-    return <D.SwimeLineAction>{description}</D.SwimeLineAction>
-  } else return <D.TransparentBox>test</D.TransparentBox>
+    return (
+      <D.SwimeLineAction>
+        <Typography variant='caption'>{description}</Typography>
+      </D.SwimeLineAction>
+    )
+  } else return <D.TransparentBox />
 }
 
 export default ActionBox

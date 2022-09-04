@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { IActor } from '../../../interfaces/Actor'
 import {
   IAction,
@@ -9,8 +10,6 @@ import {
 import ActionBox from '../ActionBox/ActionBox'
 import CommunicationBox from '../CommunicationBox/CommunicationBox'
 
-import * as D from '../diagram.style'
-
 type Props = {
   actor: IActor
   touchpoint: ITouchpoint
@@ -19,6 +18,7 @@ type Props = {
 const TouchpointInfo = (props: Props) => {
   const actionDescription = props.touchpoint as IAction
   const communicationDescription = props.touchpoint as ICommunication
+
   return (
     <>
       {props.touchpoint.type === TouchpointType.Action ? (
@@ -33,7 +33,7 @@ const TouchpointInfo = (props: Props) => {
           senderID={communicationDescription.senderID}
           senderDescription={communicationDescription.touchpointDescription.senderDescription}
           receiverID={communicationDescription.receiverID}
-          recieverDescription={communicationDescription.touchpointDescription.receiverDescription}
+          receiverDescription={communicationDescription.touchpointDescription.receiverDescription}
           channel={communicationDescription.touchpointDescription.channel}
         />
       )}

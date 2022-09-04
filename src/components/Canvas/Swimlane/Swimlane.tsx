@@ -14,9 +14,9 @@ const Swimlane = () => {
         return (
           <D.SwimlaneRow key={index}>
             <ActorInfo actor={actor} />
-            {values.touchpoints.map((touchpoint, index) => {
-              return <TouchpointInfo key={index} actor={actor} touchpoint={touchpoint} />
-            })}
+            {values.touchpoints.map((touchpoint, index) => (
+              <TouchpointInfo key={index} actor={actor} touchpoint={touchpoint} />
+            ))}
           </D.SwimlaneRow>
         )
       })}

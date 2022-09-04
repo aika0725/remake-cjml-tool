@@ -9,6 +9,9 @@ export enum ActorRoles {
   ServiceProvider = 'service-provider',
   Attacker = 'attacker',
   System = 'system',
+  Bank = 'bank',
+  StaffIT = 'staff-it',
+  Store = 'store',
 }
 
 export enum ActorIcons {}

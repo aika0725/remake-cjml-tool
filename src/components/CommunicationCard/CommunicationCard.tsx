@@ -10,7 +10,7 @@ import SecurityRadios from '../SecurityRadios'
 import * as S from '../Styles/FormCard'
 import DeleteButton from '../DeleteButton/DeleteButton'
 import { MenuItem, TextField, ThemeProvider } from '@mui/material'
-import { ICommunication, TouchpoinTChannels } from '../../interfaces/Touchpoint'
+import { ICommunication, TouchpointChannels } from '../../interfaces/Touchpoint'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
@@ -83,17 +83,23 @@ const CommunicationCard = (props: Props) => {
               }
               helperText={touched.actors && error().touchpointDescription.senderDescription}
             >
-              <MenuItem value={TouchpoinTChannels.SMS}>SMS</MenuItem>
-              <MenuItem value={TouchpoinTChannels.Email}>Email</MenuItem>
-              <MenuItem value={TouchpoinTChannels.Phone}>Phone</MenuItem>
-              <MenuItem value={TouchpoinTChannels.Face2Face}>Face to face</MenuItem>
+              <MenuItem value={TouchpointChannels.SMS}>SMS</MenuItem>
+              <MenuItem value={TouchpointChannels.Email}>Email</MenuItem>
+              <MenuItem value={TouchpointChannels.Phone}>Phone</MenuItem>
+              <MenuItem value={TouchpointChannels.FaceToFace}>Face to face</MenuItem>
+              <MenuItem value={TouchpointChannels.Website}>Website</MenuItem>
+              <MenuItem value={TouchpointChannels.Letter}>Letter</MenuItem>
+              <MenuItem value={TouchpointChannels.Payment}>Payment</MenuItem>
+              <MenuItem value={TouchpointChannels.SelfServiceMachine}>
+                Self service machine
+              </MenuItem>
             </GenericInputTextField>
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DateTimePicker
                 label='communication start time'
                 value={date}
                 onChange={handleChangeDate}
-                renderInput={(params: any) => {
+                renderInput={(params) => {
                   return (
                     <TextField
                       name={`touchpoints[${props.index}].touchpointDescription.time`}

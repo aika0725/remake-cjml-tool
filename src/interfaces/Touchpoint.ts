@@ -15,7 +15,7 @@ export interface ICommunication extends ITouchpoint {
   senderID: string
   receiverID: string
   touchpointDescription: {
-    channel: TouchpoinTChannels | ''
+    channel: TouchpointChannels | ''
     senderDescription: string
     senderRiskCategory?: string
     receiverDescription: string
@@ -63,9 +63,13 @@ export enum TouchpointType {
   Communication = 'communication',
 }
 
-export enum TouchpoinTChannels {
-  SMS = 'Sms',
-  Email = 'Email',
-  Phone = 'Phone',
-  Face2Face = 'Face to face',
+export enum TouchpointChannels {
+  SMS = 'sms',
+  Email = 'email',
+  Phone = 'phone',
+  FaceToFace = 'face-to-face',
+  Website = 'website',
+  Letter = 'letter',
+  Payment = 'payment',
+  SelfServiceMachine = 'self-service-machine',
 }

@@ -61,6 +61,7 @@ const FormContainer = styled.div<FormResize>`
   display: flex;
   height: 100%;
   width: 50%;
+  min-width: 450px;
   margin-left: ${(props) => (props.open ? 0 : -(props.width - 43))}px;
   max-width: 722px;
   background-color: #fafaff;
@@ -104,6 +105,7 @@ const CJMLFormHeaderTypography = withStyles({
 })(Typography)
 
 const Canvas = styled.div`
+  overflow: auto;
   top: 77px;
   margin-top: 7px;
 `

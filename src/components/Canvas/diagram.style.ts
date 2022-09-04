@@ -1,7 +1,4 @@
 import styled from '@emotion/styled'
-import TrendingFlatIcon from '@mui/icons-material/TrendingFlat'
-import React from 'react'
-import { ArrowInfo } from './CommunicationBox/CommunicationBox'
 
 export const SwimlaneRow = styled.div`
   background-color: #f2f2f2;
@@ -21,23 +18,18 @@ export const SwimlaneRow = styled.div`
   padding: 15px;
   margin: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  min-width: 295px;
 `
 export const SwimlaneActorInfo = styled.div`
-  padding: 10px;
-  width: 2rem;
-  height: auto;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  height: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-
-  font-family: Calibri;
-  font-size: 0.833336em;
+  justify-content: space-around;
+  align-items: center;
+  width: 90px;
+  white-space: normal;
+  word-wrap: break-word;
 `
 
 export const actorIcon = styled.div`
@@ -55,12 +47,7 @@ export const SwimeLineAction = styled.div`
   background-color: #ffffff;
   border: 2px #7f7f7f solid;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
   display: flex;
-  font-family: Calibri;
   font-size: 0.8em;
   align-items: center;
   justify-content: center;
@@ -71,53 +58,13 @@ export const TransparentBox = styled.div`
   margin-left: 20px;
   width: 12rem;
   height: auto;
-  /* border: 2px #31859c solid; */
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 `
-type SwimlaneContentType = {
-  children?: React.ReactNode | JSX.Element | JSX.Element[] | void
-}
-export const SwimlaneSender = styled.div<SwimlaneContentType>`
-  padding: 10px;
-  margin-left: 20px;
-  width: 12rem;
-  height: auto;
-  background-color: #dbeef4;
-  border: 2px #31859c solid;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  display: flex;
-  font-family: Calibri;
-  font-size: 0.8em;
-  align-items: center;
-  /* justify-content: center; */
-  position: relative;
-`
-export const SwimlaneReceiver = styled.div`
-  padding: 10px;
-  margin-left: 20px;
-  width: 12rem;
-  height: auto;
-  background-color: #ffffff;
-  border: 2px #31859c solid;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  display: flex;
-  font-family: Calibri;
-  font-size: 0.8em;
-  align-items: center;
-  position: relative;
-`
+
 export const ChannelImage = styled.div`
   margin-right: 10px;
   display: flex;
@@ -134,30 +81,25 @@ export const CommunicationContent = styled.div`
   left: 48px;
   position: absolute;
 `
-// export const Arrow =styled.div`
-//   position: absolute;
-//   width: 20px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   height: ${(props) => (props.direction ==='up' ? 120 : 46)}px;
-//   margin-left: ${(props) => (props.direction ==='up' ? 80 : 70)}px;
-//   transform:  ${(props) => (props.direction ==='up' ? '' : 'rotate(180deg)')};
-//   margin-bottom: ${(props) => (props.direction ==='up' ? 200 : -100)}px;
-// `
-// type ArrowType = {
-//   direction: string
-//   length: string
-// }
-export const ArrowHead: any = styled.div<ArrowInfo>`
+export const Arrow = styled.div<{ length: number }>`
   position: absolute;
-  top: ${(props) => (props.direction === 'up' ? '66px' : 80 + 125 + 125 + 'px')};
-  left: 6rem;
-  transform: ${(props) => (props.direction === 'up' ? '' : 'rotate(180deg)')};
-`
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  margin-left: 82px;
+  height: ${(props) => props.length > 1 && props.length * 126 - 70 + 'px'};
+  z-index: 99;
+  &.up {
+    margin-bottom: 125px;
+    margin-bottom: ${(props) => props.length > 1 && props.length * 126 + 'px'};
+  }
 
-export const ArrowBody = styled.div`
-  height: 100%;
-  min-height: 13px;
+  &.down {
+    margin-bottom: -125px;
+    margin-bottom: ${(props) => props.length > 1 && props.length * -126 + 'px'};
+    transform: rotate(180deg);
+  }
 `
