@@ -7,6 +7,7 @@ export interface IActor {
 export enum ActorRoles {
   Customer = 'customer',
   ServiceProvider = 'service-provider',
+  Employee = 'employee',
   Attacker = 'attacker',
   System = 'system',
   Bank = 'bank',

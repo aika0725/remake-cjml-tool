@@ -33,7 +33,6 @@ const ActorCard = (props: Props) => {
         }
         mandatory
       ></GenericInputTextField>
-
       <GenericInputTextField
         mandatory
         id={props.role}
@@ -53,8 +52,12 @@ const ActorCard = (props: Props) => {
       >
         <MenuItem value={ActorRoles.Customer}>Customer/User</MenuItem>
         <MenuItem value={ActorRoles.ServiceProvider}>Service Provider</MenuItem>
+        <MenuItem value={ActorRoles.Employee}>Employee</MenuItem>
         <MenuItem value={ActorRoles.Attacker}>Attacker</MenuItem>
         <MenuItem value={ActorRoles.System}>System</MenuItem>
+        <MenuItem value={ActorRoles.Bank}>Bank</MenuItem>
+        <MenuItem value={ActorRoles.StaffIT}>Staff IT</MenuItem>
+        <MenuItem value={ActorRoles.Store}>Store</MenuItem>
       </GenericInputTextField>
     </S.Row>
   )

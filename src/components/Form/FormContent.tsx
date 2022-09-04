@@ -45,7 +45,6 @@ const FormContent = () => {
   }
 
   const uid = Math.floor(100000 + Math.random() * 900000).toString()
-  console.log(values)
   return (
     <S.FormContainer open={open} width={width} ref={formRef}>
       <form
