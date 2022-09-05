@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { CommunicationRole } from './CommunicationBox'
+import { CommunicationRole } from '../../../interfaces/Touchpoint'
 
 export const CommunicationBoxStyled = styled.div<{ role: CommunicationRole }>`
   padding: 10px;

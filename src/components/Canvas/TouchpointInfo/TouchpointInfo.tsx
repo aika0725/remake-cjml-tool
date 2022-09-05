@@ -19,8 +19,6 @@ const TouchpointInfo = (props: Props) => {
   const actionDescription = props.touchpoint as IAction
   const communicationDescription = props.touchpoint as ICommunication
 
-  console.log(props)
-
   return (
     <>
       {props.touchpoint.type === TouchpointType.Action ? (

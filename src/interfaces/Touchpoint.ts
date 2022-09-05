@@ -69,3 +69,8 @@ export enum TouchpointChannels {
   Payment = 'payment',
   SelfServiceMachine = 'self-service-machine',
 }
+
+export enum CommunicationRole {
+  Sender = 'sender',
+  Receiver = 'receiver',
+}

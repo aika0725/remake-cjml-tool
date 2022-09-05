@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { IFormData } from '../../../interfaces/FormData'
-import { ICommunication } from '../../../interfaces/Touchpoint'
+import { CommunicationRole, ICommunication } from '../../../interfaces/Touchpoint'
 import Arrow from '../Arrow/Arrow'
 
 import * as D from '../diagram.style'
@@ -17,11 +17,6 @@ export enum ArrowDirection {
 export interface ArrowInfo {
   direction: ArrowDirection
   length: number
-}
-
-export enum CommunicationRole {
-  Sender = 'sender',
-  Receiver = 'receiver',
 }
 
 type Props = ICommunication & { actorID: string }

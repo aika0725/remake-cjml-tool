@@ -12,7 +12,7 @@ const ActorInfo = ({ actor }: Props) => {
   return (
     <D.SwimlaneActorInfo>
       <ActorIcon>
-        <img src={`icons/actors/${actor.actorRole}.png`} />
+        {actor.actorRole && <img src={`icons/actors/${actor.actorRole}.png`} />}
       </ActorIcon>
       <div>
         <Typography variant='body2'>{actor.actorName}</Typography>

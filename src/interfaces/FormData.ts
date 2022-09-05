@@ -3,7 +3,6 @@ import { IAction, ICommunication } from './Touchpoint'
 
 export interface IFormData {
   actors: IActor[]
-  // touchpoints: (IAction | ICommunication)[]
   touchpoints: Array<IAction | ICommunication>
 }
 
