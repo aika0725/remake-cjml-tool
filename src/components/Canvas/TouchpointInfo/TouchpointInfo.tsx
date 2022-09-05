@@ -19,23 +19,14 @@ const TouchpointInfo = (props: Props) => {
   const actionDescription = props.touchpoint as IAction
   const communicationDescription = props.touchpoint as ICommunication
 
+  console.log(props)
+
   return (
     <>
       {props.touchpoint.type === TouchpointType.Action ? (
-        <ActionBox
-          actorID={props.actor.id}
-          initiatorID={actionDescription.initiatorID}
-          description={actionDescription.touchpointDescription.actionDescription}
-        />
+        <ActionBox {...actionDescription} actorID={props.actor.id} />
       ) : (
-        <CommunicationBox
-          actorID={props.actor.id}
-          senderID={communicationDescription.senderID}
-          senderDescription={communicationDescription.touchpointDescription.senderDescription}
-          receiverID={communicationDescription.receiverID}
-          receiverDescription={communicationDescription.touchpointDescription.receiverDescription}
-          channel={communicationDescription.touchpointDescription.channel}
-        />
+        <CommunicationBox actorID={props.actor.id} {...communicationDescription} />
       )}
     </>
   )

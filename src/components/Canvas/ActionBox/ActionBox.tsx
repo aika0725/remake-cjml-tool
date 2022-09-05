@@ -1,20 +1,18 @@
 import { Typography } from '@mui/material'
 import React from 'react'
+import { IAction } from '../../../interfaces/Touchpoint'
 
 import * as D from '../diagram.style'
+import RiskCategoryIcon from '../RiskCategory'
 
-type Props = {
-  actorID: string
-  initiatorID: string
-  description: string
-}
+type Props = IAction & { actorID: string }
 
-const ActionBox = ({ actorID, initiatorID, description }: Props) => {
-  console.log(initiatorID === actorID)
+const ActionBox = ({ actorID, initiatorID, touchpointDescription }: Props) => {
   if (actorID === initiatorID) {
     return (
       <D.SwimeLineAction>
-        <Typography variant='caption'>{description}</Typography>
+        <RiskCategoryIcon risk={touchpointDescription.riskCategory} />
+        <Typography variant='caption'>{touchpointDescription.actionDescription}</Typography>
       </D.SwimeLineAction>
     )
   } else return <D.TransparentBox />

@@ -7,6 +7,7 @@ import FormLabel from '@mui/material/FormLabel'
 import { IFormData } from '../../interfaces/FormData'
 import { useFormikContext } from 'formik'
 import * as S from '../Styles/FormCard'
+import { RiskCategory } from '../../interfaces/Touchpoint'
 type Props = {
   name: string
 }
@@ -22,9 +23,13 @@ const SecurityRadios = (props: Props) => {
         </S.BlacLabelTextTypography>
       </FormLabel>
       <RadioGroup row name={props.name} onChange={handleChange}>
-        <FormControlLabel value='threat' control={<Radio />} label='Threat' />
-        <FormControlLabel value='incident' control={<Radio />} label='Unwanted incident' />
-        <FormControlLabel value='' control={<Radio />} label='Neither of them' />
+        <FormControlLabel value={RiskCategory.Threat} control={<Radio />} label='Threat' />
+        <FormControlLabel
+          value={RiskCategory.Incident}
+          control={<Radio />}
+          label='Unwanted incident'
+        />
+        <FormControlLabel value={RiskCategory.None} control={<Radio />} label='Neither of them' />
       </RadioGroup>
     </FormControl>
   )

@@ -63,7 +63,7 @@ const ActionCard = (props: Props) => {
           </S.Row>
           <S.Row>
             <SecurityRadios
-              name={`touchpoints[${props.index}].touchpointDescription.senderRiskCategory`}
+              name={`touchpoints[${props.index}].touchpointDescription.riskCategory`}
             />
           </S.Row>
         </S.FormCard>

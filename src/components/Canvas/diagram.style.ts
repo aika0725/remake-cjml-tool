@@ -4,22 +4,16 @@ export const SwimlaneRow = styled.div`
   background-color: #f2f2f2;
   border: 3px #d8d8d8 solid;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
   display: grid;
   grid-auto-flow: column;
   grid-auto-rows: 1fr;
   gap: 0px 0px;
   width: fit-content;
-  /* height: 1in; */
   height: 70px;
   padding: 15px;
   margin: 20px;
   display: flex;
   justify-content: flex-start;
-  min-width: 295px;
 `
 export const SwimlaneActorInfo = styled.div`
   height: 100%;
@@ -30,12 +24,11 @@ export const SwimlaneActorInfo = styled.div`
   width: 90px;
   white-space: normal;
   word-wrap: break-word;
+  text-align: center;
 `
 
 export const actorIcon = styled.div`
   margin: auto;
-  /* width: 22px;
-    height: 28px; */
   width: 140%;
   height: 90%;
 `
@@ -78,6 +71,7 @@ export const CommunicationContent = styled.div`
   word-wrap: break-word;
   left: 48px;
   position: absolute;
+  justify-content: center;
 `
 export const Arrow = styled.div<{ length: number }>`
   position: absolute;

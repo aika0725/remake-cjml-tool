@@ -2,19 +2,12 @@ import { Typography } from '@mui/material'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { IFormData } from '../../../interfaces/FormData'
+import { ICommunication } from '../../../interfaces/Touchpoint'
 import Arrow from '../Arrow/Arrow'
 
 import * as D from '../diagram.style'
+import RiskCategoryIcon from '../RiskCategory'
 import * as S from './styles'
-
-type Props = {
-  actorID: string
-  senderID: string
-  receiverID: string
-  senderDescription: string
-  receiverDescription: string
-  channel: string
-}
 
 export enum ArrowDirection {
   Down = 'down',
@@ -31,14 +24,9 @@ export enum CommunicationRole {
   Receiver = 'receiver',
 }
 
-const CommunicationBox = ({
-  actorID,
-  senderID,
-  receiverID,
-  senderDescription,
-  receiverDescription,
-  channel,
-}: Props) => {
+type Props = ICommunication & { actorID: string }
+
+const CommunicationBox = ({ actorID, senderID, receiverID, touchpointDescription }: Props) => {
   const { values } = useFormikContext<IFormData>()
 
   const arrowPosition = (): ArrowInfo => {
@@ -72,14 +60,24 @@ const CommunicationBox = ({
 
   const role = validateRole()
 
-  const description = role === CommunicationRole.Sender ? senderDescription : receiverDescription
+  const description =
+    role === CommunicationRole.Sender
+      ? touchpointDescription.senderDescription
+      : touchpointDescription.receiverDescription
 
   return (
     <>
       {role ? (
         <S.CommunicationBoxStyled role={role}>
+          <RiskCategoryIcon
+            risk={
+              role === CommunicationRole.Receiver
+                ? touchpointDescription.receiverRiskCategory
+                : touchpointDescription.senderRiskCategory
+            }
+          />
           <D.ChannelImage>
-            <img src={`icons/channels/${channel}.png`} />
+            <img src={`icons/channels/${touchpointDescription.channel}.png`} />
           </D.ChannelImage>
           <D.CommunicationContent>
             <Typography variant='caption'>{description}</Typography>

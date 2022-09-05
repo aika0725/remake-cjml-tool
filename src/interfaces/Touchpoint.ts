@@ -6,9 +6,15 @@ export interface IAction extends ITouchpoint {
   initiatorID: string
   touchpointDescription: {
     actionDescription: string
-    RiskCategory?: string
+    riskCategory: RiskCategory
     time?: Date | null
   }
+}
+
+export enum RiskCategory {
+  Threat = 'threat',
+  Incident = 'incident',
+  None = 'none',
 }
 
 export interface ICommunication extends ITouchpoint {
@@ -17,29 +23,19 @@ export interface ICommunication extends ITouchpoint {
   touchpointDescription: {
     channel: TouchpointChannels | ''
     senderDescription: string
-    senderRiskCategory?: string
+    senderRiskCategory: RiskCategory
     receiverDescription: string
-    receiverRiskCategory?: string
+    receiverRiskCategory: RiskCategory
     time?: Date | null
   }
 }
-
-// export const touchpointInitialValues: IAction | ICommunication = {
-//   type: '',
-//   initiatorID: '',
-//   touchpointDescription: {
-//     actionDescription:'',
-//     RiskCategory?: '',
-//     time?: null,
-//   }
-// }
 
 export const actionInitialvalues: IAction = {
   type: '',
   initiatorID: '',
   touchpointDescription: {
     actionDescription: '',
-    RiskCategory: '',
+    riskCategory: RiskCategory.None,
     time: null,
   },
 }
@@ -51,9 +47,9 @@ export const communicationInitialvalues: ICommunication = {
   touchpointDescription: {
     channel: '',
     senderDescription: '',
-    senderRiskCategory: '',
+    senderRiskCategory: RiskCategory.None,
     receiverDescription: '',
-    receiverRiskCategory: '',
+    receiverRiskCategory: RiskCategory.None,
     time: null,
   },
 }
