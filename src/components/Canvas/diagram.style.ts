@@ -59,19 +59,17 @@ export const TransparentBox = styled.div`
   width: 12rem;
   height: auto;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
 `
 
 export const ChannelImage = styled.div`
-  margin-right: 10px;
-  display: flex;
-  position: absolute;
-  margin: auto;
   width: 28px;
   height: auto;
+  img {
+    margin-right: 10px;
+    display: flex;
+    width: 100%;
+    height: auto;
+  }
 `
 export const CommunicationContent = styled.div`
   width: 130px;

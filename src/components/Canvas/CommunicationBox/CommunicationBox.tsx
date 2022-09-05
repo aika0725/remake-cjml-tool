@@ -78,7 +78,9 @@ const CommunicationBox = ({
     <>
       {role ? (
         <S.CommunicationBoxStyled role={role}>
-          <D.ChannelImage>{channel}</D.ChannelImage>
+          <D.ChannelImage>
+            <img src={`icons/channels/${channel}.png`} />
+          </D.ChannelImage>
           <D.CommunicationContent>
             <Typography variant='caption'>{description}</Typography>
           </D.CommunicationContent>
