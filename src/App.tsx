@@ -1,7 +1,16 @@
 import { createTheme } from '@mui/material'
-import { Formik } from 'formik'
-import React from 'react'
+import { Formik, useFormikContext } from 'formik'
+import React, { useState } from 'react'
 import { ThemeContext } from 'styled-components'
+
+import Canvas from './components/Canvas/Canvas'
+import { OpenContext, OpenStatusContext } from './components/Context/OpenStatusContext'
+import FormContent from './components/Form/FormContent'
+import Loading from './components/generic-components/Loading'
+import Header from './components/Header/Header'
+import { Main } from './components/Styles/FormCard'
+import { validationSchema } from './components/validation'
+import { formInitialValues, IFormData } from './interfaces/FormData'
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -17,16 +26,9 @@ declare module '@mui/material/styles' {
   }
 }
 
-import Canvas from './components/Canvas/Canvas'
-import { OpenContext, OpenStatusContext } from './components/Context/OpenStatusContext'
-import FormContent from './components/Form/FormContent'
-import Header from './components/Header/Header'
-import { Main } from './components/Styles/FormCard'
-import { validationSchema } from './components/validation'
-import { formInitialValues } from './interfaces/FormData'
-
 function App() {
   const [open, setOpen] = React.useState<OpenContext['open']>(true)
+
   const status = { open, setOpen }
 
   const theme = createTheme()
@@ -45,9 +47,11 @@ function App() {
               validationSchema={validationSchema}
               validateOnChange={false}
               validateOnBlur={false}
+              validateOnMount={false}
             >
               <>
                 <FormContent />
+
                 <Canvas />
               </>
             </Formik>
