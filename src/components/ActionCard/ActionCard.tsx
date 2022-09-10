@@ -3,7 +3,7 @@ import React from 'react'
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import { IFormData } from '../../interfaces/FormData'
-import { FieldArrayRenderProps, useFormikContext } from 'formik'
+import { ErrorMessage, FieldArrayRenderProps, useFormikContext } from 'formik'
 import { ThemeProvider, Typography } from '@mui/material'
 
 import ActorRadios from '../ActorRadios/ActorRadios'
@@ -23,6 +23,7 @@ const ActionCard = (props: Props) => {
   const touchpointAction = values.touchpoints[props.index] as unknown as IAction
   const error = () => {
     const touchpointError = (errors as unknown as IFormData).touchpoints?.[props.index] as IAction
+    console.log(touchpointError)
     return touchpointError
   }
   return (
@@ -55,15 +56,26 @@ const ActionCard = (props: Props) => {
               label='Action description'
               value={touchpointAction.touchpointDescription.actionDescription}
               handleChange={handleChange}
-              error={
-                touched.touchpoints && Boolean(error().touchpointDescription.actionDescription)
-              }
-              helperText={touched.touchpoints && error().touchpointDescription.actionDescription}
+              // error={false}
+              // helperText=''
+              // error={
+              //   error().touchpointDescription && touched.touchpoints
+              //     ? Boolean(error().touchpointDescription.actionDescription)
+              //     : false
+              // }
+              // helperText={
+              //   error().touchpointDescription &&
+              //   touched.touchpoints &&
+              //   error().touchpointDescription.actionDescription
+              // }
+            />
+            <ErrorMessage
+              name={`touchpoints[${props.index}].touchpointDescription.actionDescription`}
             />
           </S.Row>
           <S.Row>
             <SecurityRadios
-              name={`touchpoints[${props.index}].touchpointDescription.riskCategory`}
+              name={`touchpoints[${props.index}].touchpointDescription.senderRiskCategory`}
             />
           </S.Row>
         </S.FormCard>

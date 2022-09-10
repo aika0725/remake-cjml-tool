@@ -6,7 +6,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { Divider, Typography, IconButton, Button } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { FieldArray, useFormikContext } from 'formik'
+import { FieldArray, Form, useFormikContext } from 'formik'
 
 import * as S from '../Styles/FormCard'
 import { IFormData } from '../../interfaces/FormData'
@@ -23,7 +23,7 @@ import debounce from 'lodash/debounce'
 
 const FormContent = () => {
   const theme = useTheme()
-  const { values, handleSubmit, validateForm } = useFormikContext<IFormData>()
+  const { values, handleSubmit, validateForm, errors } = useFormikContext<IFormData>()
 
   const debouncedValidate = useMemo(() => debounce(validateForm, 500), [validateForm])
 
@@ -41,17 +41,22 @@ const FormContent = () => {
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    handleSubmit()
+    console.log(event)
+    // handleSubmit()
   }
 
   const uid = Math.floor(100000 + Math.random() * 900000).toString()
   return (
     <S.FormContainer open={open} width={width} ref={formRef}>
-      <form
+      <Form
+        role='form'
         onSubmit={(e) => {
-          handleFormSubmit(e)
+          e.preventDefault()
+          console.log(values)
+          console.log('errors', errors)
+          handleSubmit()
         }}
-        style={{ width: '100%' }}
+        style={{ width: '100%', height: 'fit-content' }}
       >
         <S.FormHeader>
           <S.CJMLFormHeaderTypography>Create a CJML diagram</S.CJMLFormHeaderTypography>
@@ -82,7 +87,7 @@ const FormContent = () => {
                   </S.FormCard>
                 ))}
                 <Button
-                  variant='outlined'
+                  variant='text'
                   startIcon={<AddIcon />}
                   onClick={() => arrayHelpers.push({ id: uid, actorName: '', actorRole: '' })}
                 >
@@ -114,10 +119,12 @@ const FormContent = () => {
             )}
           />
         </S.Section>
-        <Button color='primary' variant='contained' fullWidth type='submit'>
-          Submit
-        </Button>
-      </form>
+        <S.Section style={{ marginBottom: '30px' }}>
+          <Button color='primary' variant='contained' fullWidth type='submit'>
+            Submit
+          </Button>
+        </S.Section>
+      </Form>
     </S.FormContainer>
   )
 }

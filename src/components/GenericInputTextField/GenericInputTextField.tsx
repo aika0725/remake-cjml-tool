@@ -9,8 +9,8 @@ type Props = {
   handleChange: (e: string | ChangeEvent<any>) => void
   // handleBlur: (e: string | ChangeEvent<any>) => void
 
-  error: boolean | undefined
-  helperText: string | undefined
+  error?: boolean | undefined
+  helperText?: string | undefined
   mandatory?: boolean
   select?: boolean
   margin?: 'none' | 'dense' | 'normal'

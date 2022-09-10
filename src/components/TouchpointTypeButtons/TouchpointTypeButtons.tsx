@@ -8,6 +8,7 @@ import {
   communicationInitialvalues,
   TouchpointType,
 } from '../../interfaces/Touchpoint'
+import AddIcon from '@mui/icons-material/Add'
 
 type Props = {
   arrayHelpers: FieldArrayRenderProps
@@ -26,10 +27,18 @@ const TouchpointTypeButtons = (props: Props) => {
   return (
     <div>
       <Stack className='touchpoint-types' spacing={2} direction='row'>
-        <Button variant='text' onClick={() => handleClick(TouchpointType.Action)}>
+        <Button
+          variant='text'
+          onClick={() => handleClick(TouchpointType.Action)}
+          startIcon={<AddIcon />}
+        >
           Create Action
         </Button>
-        <Button variant='text' onClick={() => handleClick(TouchpointType.Communication)}>
+        <Button
+          variant='text'
+          onClick={() => handleClick(TouchpointType.Communication)}
+          startIcon={<AddIcon />}
+        >
           Create Communication point
         </Button>
       </Stack>
