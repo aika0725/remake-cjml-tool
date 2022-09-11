@@ -7,11 +7,8 @@ import * as S from '../Styles/FormCard'
 import Swimlane from './Swimlane/Swimlane'
 
 const Canvas = () => {
-  const [isCanvasLoading, setIsCanvasLoading] = useState<boolean>(false)
-
   return (
     <>
-      {isCanvasLoading && <Loading />}
       <S.Canvas>
         <Swimlane />
       </S.Canvas>

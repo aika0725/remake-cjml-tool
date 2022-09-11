@@ -14,7 +14,7 @@ type Props = {
 }
 
 const ActorCard = (props: Props) => {
-  const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
+  const { values, handleChange, errors } = useFormikContext<IFormData>()
 
   return (
     <S.Row>
@@ -24,13 +24,8 @@ const ActorCard = (props: Props) => {
         label='Actor name'
         value={values.actors[props.index].actorName}
         handleChange={handleChange}
-        error={
-          touched.actors &&
-          Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorName)
-        }
-        helperText={
-          touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorName
-        }
+        error={Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorName)}
+        helperText={(errors as unknown as IFormData).actors?.[props.index]?.actorName}
         mandatory
       ></GenericInputTextField>
       <GenericInputTextField
@@ -41,14 +36,8 @@ const ActorCard = (props: Props) => {
         label='Actor role'
         value={values.actors[props.index].actorRole}
         handleChange={handleChange}
-        error={
-          // Need to check why this needs type conversion o unknown
-          touched.actors &&
-          Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorRole)
-        }
-        helperText={
-          touched.actors && (errors as unknown as IFormData).actors?.[props.index]?.actorRole
-        }
+        error={Boolean((errors as unknown as IFormData).actors?.[props.index]?.actorRole)}
+        helperText={(errors as unknown as IFormData).actors?.[props.index]?.actorRole}
       >
         <MenuItem value={ActorRoles.Customer}>Customer/User</MenuItem>
         <MenuItem value={ActorRoles.ServiceProvider}>Service Provider</MenuItem>

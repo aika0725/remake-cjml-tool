@@ -2,9 +2,13 @@ import styled from '@emotion/styled'
 
 export const LoadingWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  position: absolute;
   z-index: 99;
-  background-color: black;
-  opacity: 0.2;
+  position: absolute;
+  top: 0px;
+  background: rgba(255, 255, 255, 0.8);
+  bottom: 0px;
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

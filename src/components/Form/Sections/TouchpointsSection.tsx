@@ -1,19 +1,27 @@
 import { Typography } from '@mui/material'
 import { FieldArray, useFormikContext } from 'formik'
-import React from 'react'
+import React, { RefObject, useRef } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 import { IFormData } from '../../../interfaces/FormData'
 import { IAction, ICommunication, TouchpointType } from '../../../interfaces/Touchpoint'
 import ActionCard from '../../ActionCard'
 import CommunicationCard from '../../CommunicationCard'
+import Loading from '../../generic-components/Loading'
 import { Section, SectionTitle } from '../../Styles/FormCard'
 import TouchpointTypeButtons from '../../TouchpointTypeButtons/TouchpointTypeButtons'
 
+type Props = {
+  isUpdating: boolean
+}
+
 const TouchpointsSection = () => {
   const { values } = useFormikContext<IFormData>()
+
+  const parentDivRef: any = useRef()
+
   return (
-    <Section>
+    <Section ref={parentDivRef}>
       <SectionTitle>
         <Typography variant='h5'>Touchpoints</Typography>
       </SectionTitle>
@@ -22,7 +30,11 @@ const TouchpointsSection = () => {
         render={(arrayHelpers) => (
           <Droppable droppableId='droppable'>
             {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                style={{ position: 'relative' }}
+              >
                 {values.touchpoints.map((touchpoint: IAction | ICommunication, index) => (
                   <div key={index}>
                     {touchpoint.type === TouchpointType.Action ? (
@@ -52,8 +64,8 @@ const TouchpointsSection = () => {
                     )}
                   </div>
                 ))}
-                <TouchpointTypeButtons arrayHelpers={arrayHelpers} />
                 {provided.placeholder}
+                <TouchpointTypeButtons arrayHelpers={arrayHelpers} />
               </div>
             )}
           </Droppable>

@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, Typography } from '@material-ui/core'
 import { FieldArrayRenderProps, useFormikContext } from 'formik'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { IFormData } from '../../interfaces/FormData'
 import ActorRadios from '../ActorRadios/ActorRadios'
@@ -10,7 +10,7 @@ import SecurityRadios from '../SecurityRadios'
 import * as S from '../Styles/FormCard'
 import DeleteButton from '../DeleteButton/DeleteButton'
 import { MenuItem, TextField, ThemeProvider } from '@mui/material'
-import { ICommunication, TouchpointChannels } from '../../interfaces/Touchpoint'
+import { ICommunication, TouchpointChannels, TouchpointType } from '../../interfaces/Touchpoint'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
@@ -23,6 +23,7 @@ type Props = {
 const CommunicationCard = (props: Props) => {
   const { values, handleChange, touched, errors, setFieldValue } = useFormikContext<IFormData>()
   const [date, setDate] = React.useState<Date | null>(null)
+
   const handleChangeDate = (newDate: Date | null) => {
     setDate(newDate)
     setFieldValue(`touchpoints[${props.index}].touchpointDescription.time`, date)
@@ -34,6 +35,7 @@ const CommunicationCard = (props: Props) => {
     ] as ICommunication
     return touchpointError
   }
+
   return (
     <div>
       <ThemeProvider theme={S.FontTheme}>
@@ -50,7 +52,12 @@ const CommunicationCard = (props: Props) => {
                   <Typography variant='button'>sender</Typography>*
                 </S.BlacLabelTextTypography>
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].senderID`} />
+              <ActorRadios
+                name={`touchpoints[${props.index}].senderID`}
+                index={props.index}
+                type={TouchpointType.Communication}
+                entity={'sender'}
+              />
             </FormControl>
           </S.Row>
           <S.Row>
@@ -122,7 +129,12 @@ const CommunicationCard = (props: Props) => {
                   Choose the <Typography variant='button'>Receiver</Typography>*
                 </S.BlacLabelTextTypography>
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].receiverID`} />
+              <ActorRadios
+                name={`touchpoints[${props.index}].receiverID`}
+                index={props.index}
+                type={TouchpointType.Communication}
+                entity={'receiver'}
+              />
             </FormControl>
           </S.Row>
           <S.Row>

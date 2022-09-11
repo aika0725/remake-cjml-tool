@@ -24,7 +24,7 @@ const GenericInputTextField = (props: Props) => {
       fullWidth
       id={props.name}
       name={props.name}
-      label={props.label + (props.mandatory ? '*' : '')}
+      label={props.label}
       value={props.value}
       onChange={props.handleChange}
       error={props.error}
@@ -32,6 +32,7 @@ const GenericInputTextField = (props: Props) => {
       select={props.select ? true : false}
       margin={props.margin}
       multiline={props.multiline}
+      required={props.mandatory}
     >
       {props.children}
     </TextField>

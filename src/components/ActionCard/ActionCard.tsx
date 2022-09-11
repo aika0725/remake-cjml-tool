@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import { IFormData } from '../../interfaces/FormData'
-import { ErrorMessage, FieldArrayRenderProps, useFormikContext } from 'formik'
-import { ThemeProvider, Typography } from '@mui/material'
+import { FieldArrayRenderProps, useFormikContext } from 'formik'
+import { FormHelperText, ThemeProvider, Typography } from '@mui/material'
 
 import ActorRadios from '../ActorRadios/ActorRadios'
 import SecurityRadios from '../SecurityRadios'
 import * as S from '../Styles/FormCard'
 import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
 import DeleteButton from '../DeleteButton/DeleteButton'
-import { IAction } from '../../interfaces/Touchpoint'
+import { IAction, TouchpointType } from '../../interfaces/Touchpoint'
 
 type Props = {
   index: number
@@ -19,13 +19,22 @@ type Props = {
 }
 
 const ActionCard = (props: Props) => {
-  const { values, handleChange, touched, errors } = useFormikContext<IFormData>()
+  const { values, handleChange, errors } = useFormikContext<IFormData>()
   const touchpointAction = values.touchpoints[props.index] as unknown as IAction
+
   const error = () => {
     const touchpointError = (errors as unknown as IFormData).touchpoints?.[props.index] as IAction
-    console.log(touchpointError)
     return touchpointError
   }
+
+  const getSafeError = (err: boolean | string): any => {
+    if (err !== undefined) {
+      return err
+    } else {
+      return false
+    }
+  }
+
   return (
     <div>
       <ThemeProvider theme={S.FontTheme}>
@@ -35,16 +44,16 @@ const ActionCard = (props: Props) => {
             <DeleteButton arrayHelpers={props.arrayHelpers} index={props.index} />{' '}
           </S.CardHeader>
           <S.Row>
-            <FormControl>
-              <FormLabel id='senderName'>
-                <S.BlacLabelTextTypography>
-                  Who did this action? Choose the{' '}
-                  <Typography variant='button' fontWeight={600}>
-                    initiator
-                  </Typography>
-                </S.BlacLabelTextTypography>
+            <FormControl error={error() && Boolean(error().initiatorID)} variant='standard'>
+              <FormLabel id='senderName' sx={{ fontSize: '13px', color: '#000' }}>
+                Who did this action? Choose the initiator *
               </FormLabel>
-              <ActorRadios name={`touchpoints[${props.index}].initiatorID`} />
+              <ActorRadios
+                name={`touchpoints[${props.index}].initiatorID`}
+                index={props.index}
+                type={TouchpointType.Action}
+              />
+              <FormHelperText>{error() && error().initiatorID}</FormHelperText>
             </FormControl>
           </S.Row>
           <S.Row>
@@ -56,26 +65,21 @@ const ActionCard = (props: Props) => {
               label='Action description'
               value={touchpointAction.touchpointDescription.actionDescription}
               handleChange={handleChange}
-              // error={false}
-              // helperText=''
-              // error={
-              //   error().touchpointDescription && touched.touchpoints
-              //     ? Boolean(error().touchpointDescription.actionDescription)
-              //     : false
-              // }
-              // helperText={
-              //   error().touchpointDescription &&
-              //   touched.touchpoints &&
-              //   error().touchpointDescription.actionDescription
-              // }
-            />
-            <ErrorMessage
-              name={`touchpoints[${props.index}].touchpointDescription.actionDescription`}
+              error={
+                error() &&
+                error().touchpointDescription &&
+                getSafeError(Boolean(error().touchpointDescription.actionDescription))
+              }
+              helperText={
+                error() &&
+                error().touchpointDescription &&
+                error().touchpointDescription.actionDescription
+              }
             />
           </S.Row>
           <S.Row>
             <SecurityRadios
-              name={`touchpoints[${props.index}].touchpointDescription.senderRiskCategory`}
+              name={`touchpoints[${props.index}].touchpointDescription.riskCategory`}
             />
           </S.Row>
         </S.FormCard>
