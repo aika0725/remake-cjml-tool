@@ -26,20 +26,28 @@ const SideBar = () => {
       <Toolbar />
       <Box sx={{ overflow: 'auto' }}>
         <List>
-          {['Overview', 'CJML Basics', 'Usage of the tool', 'Risk management'].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding component={Link} to={`/document/${text}`}>
-                <ListItemButton>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ),
-          )}
+          {['Overview', 'CJML Basics', 'Usage of the tool', 'Risk management'].map((text) => (
+            <ListItem
+              key={text}
+              disablePadding
+              component={Link}
+              to={`/document/${text.replace(/\s+/g, '-').toLowerCase()}`}
+            >
+              <ListItemButton>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <List>
-          {['Example 1', 'Example 2', 'Example 3'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {['Example 1', 'Example 2', 'Example 3'].map((text) => (
+            <ListItem
+              key={text}
+              disablePadding
+              component={Link}
+              to={`/document/${text.replace(/\s+/g, '-').toLowerCase()}`}
+            >
               <ListItemButton>
                 <ListItemText primary={text} />
               </ListItemButton>

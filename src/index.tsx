@@ -17,10 +17,10 @@ root.render(
       <Route path='/' element={<App />}></Route>
       <Route path='/document' element={<Document />}>
         <Route index element={<Overview />} />
-        <Route path='Overview' element={<Overview />} />
-        <Route path='Usage of the tool' element={<Usage />} />
-        <Route path='CJML Basics' element={<Basic />} />
-        <Route path='Risk management' element={<Risk />} />
+        <Route path='overview' element={<Overview />} />
+        <Route path='usage-of-the-tool' element={<Usage />} />
+        <Route path='cjml-basics' element={<Basic />} />
+        <Route path='risk-management' element={<Risk />} />
       </Route>
     </Routes>
   </BrowserRouter>,
