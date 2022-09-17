@@ -13,8 +13,9 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 
 import { OpenStatusContext } from '../Context/OpenStatusContext'
+import { Link } from 'react-router-dom'
 
-const items = ['Export diagram as Image', 'Export diagram as XML', 'User Guide']
+const items = ['Export diagram as Image', 'Export diagram as XML']
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -90,6 +91,7 @@ const Header = () => {
               <MenuItem key='start' onClick={handleDrawerOpen}>
                 Start/Edit
               </MenuItem>
+
               {items.map((item) => (
                 <MenuItem key={item} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center' style={{ textTransform: 'none' }}>
@@ -97,6 +99,11 @@ const Header = () => {
                   </Typography>
                 </MenuItem>
               ))}
+              <MenuItem key='doc' onClick={handleCloseNavMenu}>
+                <Typography textAlign='center' style={{ textTransform: 'none' }}>
+                  <Link to={'/document'}>User Guide</Link>
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -119,6 +126,17 @@ const Header = () => {
                 {item}
               </Button>
             ))}
+            <Button
+              key='doc'
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              style={{ textTransform: 'none' }}
+              component={Link}
+              to='/document'
+            >
+              User Guide
+              {/* <Link to={'/document'}>User Guide</Link> */}
+            </Button>
           </Box>
         </Toolbar>
       </Container>

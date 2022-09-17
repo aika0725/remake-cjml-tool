@@ -3,12 +3,27 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Document from './Document/Document'
+import Overview from './Document/Overview'
+import Basic from './Document/Basic'
+import Risk from './Document/Risk'
+import Usage from './Document/Usage'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  // <React.StrictMode>
-  <App />,
-  // </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App />}></Route>
+      <Route path='/document' element={<Document />}>
+        <Route index element={<Overview />} />
+        <Route path='Overview' element={<Overview />} />
+        <Route path='Usage of the tool' element={<Usage />} />
+        <Route path='CJML Basics' element={<Basic />} />
+        <Route path='Risk management' element={<Risk />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>,
 )
 
 // If you want to start measuring performance in your app, pass a function
