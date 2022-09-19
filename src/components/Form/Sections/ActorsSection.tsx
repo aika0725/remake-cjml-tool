@@ -35,7 +35,7 @@ const ActorsSection = () => {
               </FormCard>
             ))}
             <Button
-              variant='outlined'
+              variant='text'
               startIcon={<AddIcon />}
               onClick={() => arrayHelpers.push({ id: uid, actorName: '', actorRole: '' })}
             >

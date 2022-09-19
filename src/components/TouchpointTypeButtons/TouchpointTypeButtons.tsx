@@ -25,8 +25,8 @@ const TouchpointTypeButtons = (props: Props) => {
   }
 
   return (
-    <div>
-      <Stack className='touchpoint-types' spacing={2} direction='row'>
+    <>
+      <Stack className='touchpoint-types' spacing={2} direction='row' marginBottom={2}>
         <Button
           variant='text'
           onClick={() => handleClick(TouchpointType.Action)}
@@ -42,7 +42,7 @@ const TouchpointTypeButtons = (props: Props) => {
           Create Communication point
         </Button>
       </Stack>
-    </div>
+    </>
   )
 }
 

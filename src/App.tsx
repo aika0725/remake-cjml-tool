@@ -1,16 +1,15 @@
 import { createTheme } from '@mui/material'
-import { Formik, useFormikContext } from 'formik'
-import React, { useState } from 'react'
+import { Formik } from 'formik'
+import React from 'react'
 import { ThemeContext } from 'styled-components'
 
 import Canvas from './components/Canvas/Canvas'
 import { OpenContext, OpenStatusContext } from './components/Context/OpenStatusContext'
 import FormContent from './components/Form/FormContent'
-import Loading from './components/generic-components/Loading'
 import Header from './components/Header/Header'
 import { Main } from './components/Styles/FormCard'
 import { validationSchema } from './components/validation'
-import { formInitialValues, IFormData } from './interfaces/FormData'
+import { formInitialValues } from './interfaces/FormData'
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -18,6 +17,7 @@ declare module '@mui/material/styles' {
       danger: string
     }
   }
+
   // allow configuration using `createTheme`
   interface ThemeOptions {
     status?: {
@@ -51,7 +51,6 @@ function App() {
             >
               <>
                 <FormContent />
-
                 <Canvas />
               </>
             </Formik>
