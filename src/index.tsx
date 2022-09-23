@@ -8,6 +8,9 @@ import Overview from './Document/Overview'
 import Basic from './Document/Basic'
 import Risk from './Document/Risk'
 import Usage from './Document/Usage'
+import ExamplePizza from './Document/Example1'
+import ExampleCinema from './Document/Example2'
+import ExamplePhishing from './Document/Example3'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -20,6 +23,9 @@ root.render(
         <Route path='usage-of-the-tool' element={<Usage />} />
         <Route path='cjml-basics' element={<Basic />} />
         <Route path='risk-management' element={<Risk />} />
+        <Route path='example-1' element={<ExamplePizza />} />
+        <Route path='example-2' element={<ExampleCinema />} />
+        <Route path='example-3' element={<ExamplePhishing />} />
       </Route>
     </Routes>
   </BrowserRouter>,
