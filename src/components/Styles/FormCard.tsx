@@ -127,6 +127,7 @@ const Canvas = styled.div`
 const Main = styled.div<OpenContext['open']>`
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 68.5px);
 
   @media (max-width: 566px) {
     flex-direction: column;
