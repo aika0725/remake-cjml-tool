@@ -6,17 +6,31 @@ import ImageSwimlane from '../../src/image-doc/swimlane.png'
 import ImageAction from '../../src/image-doc/action.png'
 import ImageCommunication from '../../src/image-doc/communication.png'
 import { Image } from './Image-styles'
+import { Divider } from '@mui/material'
+import { fontStyles } from './styles'
 
 const Basic = () => {
+  const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5}>
+      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
+        {Content.overview.title}
+      </Typography>
+      {Content.overview.paragraph.map((par, index) => {
+        return (
+          <Typography paragraph key={index}>
+            {par}
+          </Typography>
+        )
+      })}
+      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
         {Content.basics.title}
       </Typography>
       <Image src={ImageSwimlane} />
-      {/* ------------ */}
 
-      <Typography variant='h3' component='h2' mb={2}>
+      <Divider />
+
+      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
         {Content.basics.actor.title}
       </Typography>
 
@@ -27,11 +41,12 @@ const Basic = () => {
           </Typography>
         )
       })}
+      <Divider />
       {/* ---------- */}
-      <Typography variant='h3' component='h2' mb={2}>
+      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
         {Content.basics.touchpoint.title}
       </Typography>
-      <Typography variant='h4' component='h2' mb={2}>
+      <Typography variant='h4' component='h2' mb={2} className={fontStyle.thirdTitle}>
         {Content.basics.touchpoint.action.title}
       </Typography>
       <Image src={ImageAction} />
@@ -42,7 +57,7 @@ const Basic = () => {
           </Typography>
         )
       })}
-      <Typography variant='h4' component='h2' mb={2}>
+      <Typography variant='h4' component='h2' mb={2} className={fontStyle.thirdTitle}>
         {Content.basics.touchpoint.communication.title}
       </Typography>
       <Image src={ImageCommunication} />

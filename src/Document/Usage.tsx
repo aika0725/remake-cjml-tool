@@ -6,15 +6,17 @@ import ImageOverview from '../../src/image-doc/tool-overview.png'
 import ImageForm from '../../src/image-doc/form.png'
 import ImageDragDrop from '../../src/image-doc/drag-drop.png'
 import { Image } from './Image-styles'
+import { fontStyles } from './styles'
+import { Divider } from '@mui/material'
 
 const Usage = () => {
+  const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5}>
+      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
         {Content.usage.title}
       </Typography>
-      {/* ------------ */}
-      <Typography variant='h3' component='h2' mb={2}>
+      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
         {Content.usage.overview.title}
       </Typography>
       {Content.usage.overview.paragraph.map((par, index) => {
@@ -27,9 +29,9 @@ const Usage = () => {
 
       <Image src={ImageOverview} />
 
-      {/* ---------- */}
+      <Divider />
 
-      <Typography variant='h3' component='h2' mb={2}>
+      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
         {Content.usage.form.title}
       </Typography>
       <Typography paragraph>1. Follow the instruction and fill the form</Typography>
