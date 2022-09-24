@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { Link } from 'react-router-dom'
-import { exportAsImage } from '../exportAsImage'
+import { exportAsImage } from '../../helpers/exportAsImage'
 
 const items = ['Export diagram as Image', 'Export diagram as XML']
 type Props = {

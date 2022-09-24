@@ -116,13 +116,12 @@ const CJMLFormHeaderTypography = withStyles({
 const Canvas = styled.div`
   overflow: auto;
   top: 77px;
+  height: fit-content;
   margin-top: 7px;
 `
 const Main = styled.div<OpenContext['open']>`
   display: flex;
-  height: calc(100vh - 68.5px);
   flex-direction: row;
-  /* transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(-35%)')}; */
 
   @media (max-width: 566px) {
     flex-direction: column;
