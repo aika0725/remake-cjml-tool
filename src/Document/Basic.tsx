@@ -13,8 +13,8 @@ const Basic = () => {
   const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
-        {Content.overview.title}
+      <Typography variant='h2' mb={5}>
+        <Box className={fontStyle.title}>{Content.overview.title}</Box>
       </Typography>
       {Content.overview.paragraph.map((par, index) => {
         return (
@@ -23,15 +23,15 @@ const Basic = () => {
           </Typography>
         )
       })}
-      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
-        {Content.basics.title}
+      <Typography variant='h2' mb={5}>
+        <Box className={fontStyle.title}>{Content.basics.title}</Box>
       </Typography>
       <Image src={ImageSwimlane} />
 
       <Divider />
 
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.basics.actor.title}
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}>{Content.basics.actor.title}</Box>
       </Typography>
 
       {Content.basics.actor.paragraph.map((par, index) => {
@@ -43,11 +43,11 @@ const Basic = () => {
       })}
       <Divider />
       {/* ---------- */}
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.basics.touchpoint.title}
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}> {Content.basics.touchpoint.title}</Box>
       </Typography>
-      <Typography variant='h4' component='h2' mb={2} className={fontStyle.thirdTitle}>
-        {Content.basics.touchpoint.action.title}
+      <Typography variant='h4' mb={2}>
+        <Box className={fontStyle.thirdTitle}>{Content.basics.touchpoint.action.title}</Box>
       </Typography>
       <Image src={ImageAction} />
       {Content.basics.touchpoint.action.paragraph.map((par, index) => {
@@ -57,8 +57,8 @@ const Basic = () => {
           </Typography>
         )
       })}
-      <Typography variant='h4' component='h2' mb={2} className={fontStyle.thirdTitle}>
-        {Content.basics.touchpoint.communication.title}
+      <Typography variant='h4' mb={2} className={fontStyle.thirdTitle}>
+        <Box className={fontStyle.thirdTitle}>{Content.basics.touchpoint.communication.title}</Box>
       </Typography>
       <Image src={ImageCommunication} />
       {Content.basics.touchpoint.communication.paragraph.map((par, index) => {

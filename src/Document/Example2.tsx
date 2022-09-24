@@ -10,13 +10,12 @@ const ExampleCinema = () => {
   const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
-        {Examples.cinema.name}
+      <Typography variant='h2' mb={5}>
+        <Box className={fontStyle.title}>{Examples.cinema.name}</Box>
       </Typography>
       {/* ------------ */}
-      {/* ------------ */}
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        Content:
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}>Content:</Box>
       </Typography>
       <Typography paragraph>Background: {Examples.cinema.background}</Typography>
       <Typography paragraph>{Examples.cinema.content}</Typography>

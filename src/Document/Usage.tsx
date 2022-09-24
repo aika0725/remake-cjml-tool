@@ -13,11 +13,11 @@ const Usage = () => {
   const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
-        {Content.usage.title}
+      <Typography variant='h2' mb={5}>
+        <Box className={fontStyle.title}> {Content.usage.title}</Box>
       </Typography>
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.usage.overview.title}
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}> {Content.usage.overview.title}</Box>
       </Typography>
       {Content.usage.overview.paragraph.map((par, index) => {
         return (
@@ -31,8 +31,8 @@ const Usage = () => {
 
       <Divider />
 
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.usage.form.title}
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}>{Content.usage.form.title}</Box>
       </Typography>
       <Typography paragraph>1. Follow the instruction and fill the form</Typography>
       <Image src={ImageForm} />

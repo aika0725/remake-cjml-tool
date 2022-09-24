@@ -9,12 +9,12 @@ const Risk = () => {
   const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5} className={fontStyle.title}>
-        {Content.risk.title}
+      <Typography variant='h2' mb={5}>
+        <Box className={fontStyle.title}>{Content.risk.title}</Box>
       </Typography>
-      {/* ------------ */}
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.risk.asset.title}
+
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}>{Content.risk.asset.title}</Box>
       </Typography>
       {Content.risk.asset.paragraph.map((par, index) => {
         return (
@@ -24,9 +24,9 @@ const Risk = () => {
         )
       })}
       <Divider />
-      {/* ---------- */}
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.risk.threat.title}
+
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}>{Content.risk.threat.title}</Box>
       </Typography>
       {Content.basics.touchpoint.action.paragraph.map((par, index) => {
         return (
@@ -36,8 +36,8 @@ const Risk = () => {
         )
       })}
       <Divider />
-      <Typography variant='h3' component='h2' mb={2} className={fontStyle.subTitle}>
-        {Content.risk.incident.title}
+      <Typography variant='h3' mb={2}>
+        <Box className={fontStyle.subTitle}>{Content.risk.incident.title}</Box>
       </Typography>
       {Content.risk.incident.paragraph.map((par, index) => {
         return (
