@@ -33,6 +33,7 @@ const FormCard = styled.div`
 
   transition: 0.5s;
 `
+
 const FormHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -43,6 +44,7 @@ const CardHeader = styled.div`
   justify-content: space-between;
   width: 100%;
 `
+
 const Row = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -57,9 +59,11 @@ const Section = styled.section`
 
   margin-top: 35px;
 `
+
 const SectionTitle = styled.div`
   margin-bottom: 20px;
 `
+
 type FormResize = {
   open: OpenContext['open']
   width: number
@@ -79,7 +83,6 @@ const FormContainer = styled.div<FormResize>`
   top: 77px;
   padding: 0px 30px;
   overflow-y: auto;
-  /* transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(-95%)')}; */
 
   @media (max-width: 566px) {
     width: 100%;
@@ -90,6 +93,7 @@ const FormContainer = styled.div<FormResize>`
 const TouchpointContainer = styled.div`
   padding: 16px 0 0 0;
 `
+
 const FontTheme = createTheme({
   typography: {
     fontSize: 13,
@@ -119,6 +123,7 @@ const Canvas = styled.div`
   height: fit-content;
   margin-top: 7px;
 `
+
 const Main = styled.div<OpenContext['open']>`
   display: flex;
   flex-direction: row;

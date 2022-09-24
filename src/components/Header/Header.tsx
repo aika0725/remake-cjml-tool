@@ -40,12 +40,15 @@ const Header = (props: Props) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
+
   const handleExportPng = () => {
     exportAsImage(props.exportRef, 'cjml')
   }
+
   useLayoutEffect(() => {
     console.log(props.exportRef)
   })
+
   return (
     <AppBar
       position='static'
