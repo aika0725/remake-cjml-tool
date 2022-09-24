@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, forwardRef, useLayoutEffect, useEffect } from 'react'
 import {
   AppBar,
   Typography,
@@ -14,12 +14,20 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { Link } from 'react-router-dom'
+import { exportAsImage } from '../exportAsImage'
 
 const items = ['Export diagram as Image', 'Export diagram as XML']
+type Props = {
+  exportRef: HTMLDivElement | null
+}
 
-const Header = () => {
+const Header = (props: Props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const { setOpen } = useContext(OpenStatusContext)
+
+  useEffect(() => {
+    console.log('header' + props.exportRef)
+  }, [props.exportRef])
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -32,7 +40,12 @@ const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
-
+  const handleExportPng = () => {
+    exportAsImage(props.exportRef, 'cjml')
+  }
+  useLayoutEffect(() => {
+    console.log(props.exportRef)
+  })
   return (
     <AppBar
       position='static'
@@ -128,6 +141,14 @@ const Header = () => {
             ))}
             <Button
               key='doc'
+              onClick={handleExportPng}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              style={{ textTransform: 'none' }}
+            >
+              Export
+            </Button>
+            <Button
+              key='doc'
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
@@ -135,7 +156,6 @@ const Header = () => {
               to='/document'
             >
               User Guide
-              {/* <Link to={'/document'}>User Guide</Link> */}
             </Button>
           </Box>
         </Toolbar>
