@@ -18,14 +18,9 @@ export default function Document() {
         alignItems='center'
         sx={{ flexGrow: 1, p: 3, mt: 9 }}
       >
-        {/* */}
-        {/* <Toolbar /> */}
-        {/* <Box sx={{ maxWidth: 840 }}> */}
         <Container maxWidth='md'>
           <Outlet />
         </Container>
-
-        {/* </Box> */}
       </Box>
     </Box>
   )

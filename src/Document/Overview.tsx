@@ -8,9 +8,9 @@ const Overview = () => {
   const fontStyle = fontStyles()
   return (
     <Box>
-      <Typography variant='h2' component='h2' mb={5}>
-        <Box className={fontStyle.title}> CJML Diagram Generator User Guide</Box>
-      </Typography>
+      {/* <Typography variant='h2' component='h2' mb={5}> */}
+      <Box className={fontStyle.title}> CJML Diagram Generator User Guide</Box>
+      {/* </Typography> */}
       {Content.overview.paragraph.map((par, index) => {
         return (
           <Typography paragraph key={index}>

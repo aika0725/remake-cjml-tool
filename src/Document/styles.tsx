@@ -7,24 +7,19 @@ export const fontStyles = makeStyles({
   title: {
     fontSize: 48,
     fontWeight: 500,
+    marginBottom: 32,
+    color: '#212121',
   },
   subTitle: {
     fontSize: 36,
     fontWeight: 500,
-    marginTop: 42,
+    marginTop: 32,
+    color: '#212121',
   },
   thirdTitle: {
-    fontSize: 32,
-    fontWeight: 400,
-    marginTop: 40,
+    fontSize: 28,
+    fontWeight: 500,
+    marginTop: 12,
+    color: '#212121',
   },
 })
-
-// const Demo = () => {
-//   const classes = useStyles();
-//   return (
-//     <Typography className={classes.bold}>
-//       CSS in JS
-//     </Typography>
-//   )
-// }

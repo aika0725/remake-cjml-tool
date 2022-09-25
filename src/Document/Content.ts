@@ -12,7 +12,7 @@ export const Content = {
     actor: {
       title: 'Actor',
       paragraph: [
-        'Actors are people who played an important role in your customer journey. All the actors involved in the journey have a separate swimlane. An actor could be a customer, user, citizen, consumer, patient, employee, attacker, system',
+        'Actors are people who played an important role in your customer journey. All the actors involved in the journey have a separate swimlane. An actor could be a customer, user, citizen, consumer, patient, employee, attacker, system.',
       ],
       image: '',
     },
@@ -21,7 +21,7 @@ export const Content = {
       action: {
         title: 'Action',
         paragraph: [
-          'Actions are non-communicative events or activities conducted by an actor as part of a customer journey',
+          'Actions are non-communicative events or activities conducted by an actor as part of a customer journey.',
           'For example, in a scenario that a customer wants to buy a pizza in the store, then "reading menu and choosing pizza" is the customers action.',
         ],
         image: '/src/image-doc/action.png',
@@ -29,7 +29,7 @@ export const Content = {
       communication: {
         title: 'Communication Point',
         paragraph: [
-          'Communication points are instances of communication or interaction between, for example, a user and a service provider',
+          'Communication points are instances of communication or interaction between, for example, a user and a service provider.',
           'Communication points form "the backbone" of a customer journey, and they are associated with: sender, receiver, and communication channel.',
           'For example, a customer `paying for the pizza` is an interaction with the cashier in the pizza store, the cashier `receiving customers payment`. They might not have any conversation but this `payment activity` needs two actors to be done in the in-store pizza purchasing scenario.',
           'A communication point has a sender and a receiver that must be positioned in the corresponding swimlanes of the actors.',
@@ -52,7 +52,7 @@ export const Content = {
       title: 'Asset',
       paragraph: [
         'To determine the Threat and Unwanted incident in customer journey, you have to clarify the asset that you want to protect in your scenario.',
-        'An asset is something has value and requires protection',
+        'An asset is something has value and requires protection.',
       ],
     },
   },
@@ -75,7 +75,7 @@ export const Content = {
 export const Examples = {
   pizza: {
     name: 'Pizza ordering scenario',
-    background: 'You want to eat pizza',
+    background: 'You want to eat pizza.',
     content:
       'You chose a restaurant, made an order and paid for it in the food app. After the restaurant received and confirmed your order by the app, you received a receipt and a confirmation SMS from the restaurant. The restaurant started making your pizza after they received your order. when the pizza was ready, they informed and waited for the delivery person to pick up the pizza. The delivery person picked up the pizza and then delivered it to you.',
     solution: '/src/image-doc/example1.png',

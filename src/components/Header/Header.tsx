@@ -1,4 +1,4 @@
-import React, { useContext, forwardRef, useLayoutEffect, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {
   AppBar,
   Typography,
@@ -15,8 +15,10 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { Link } from 'react-router-dom'
 import { exportAsImage } from '../../helpers/exportAsImage'
+import { exportAsXML } from '../exportAsXML'
+import { useFormikContext } from 'formik'
+import { IFormData } from '../../interfaces/FormData'
 
-const items = ['Export diagram as Image', 'Export diagram as XML']
 type Props = {
   exportRef: HTMLDivElement | null
 }
@@ -24,6 +26,7 @@ type Props = {
 const Header = (props: Props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const { setOpen } = useContext(OpenStatusContext)
+  const { values } = useFormikContext<IFormData>()
 
   useEffect(() => {
     console.log('header' + props.exportRef)
@@ -45,9 +48,11 @@ const Header = (props: Props) => {
     exportAsImage(props.exportRef, 'cjml')
   }
 
-  useLayoutEffect(() => {
-    console.log(props.exportRef)
-  })
+  const handleExportXML = () => {
+    console.log('xml')
+
+    exportAsXML(values)
+  }
 
   return (
     <AppBar
@@ -108,16 +113,21 @@ const Header = (props: Props) => {
                 Start/Edit
               </MenuItem>
 
-              {items.map((item) => (
-                <MenuItem key={item} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center' style={{ textTransform: 'none' }}>
-                    {item}
-                  </Typography>
-                </MenuItem>
-              ))}
-              <MenuItem key='doc' onClick={handleCloseNavMenu}>
+              <MenuItem onClick={handleExportPng}>
                 <Typography textAlign='center' style={{ textTransform: 'none' }}>
-                  <Link to={'/document'}>User Guide</Link>
+                  Export diagram as Image
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleExportXML}>
+                <Typography textAlign='center' style={{ textTransform: 'none' }}>
+                  Export diagram as XML
+                </Typography>
+              </MenuItem>
+              <MenuItem key='doc'>
+                <Typography textAlign='center' style={{ textTransform: 'none' }}>
+                  <Link to={'/document'} target='_blank'>
+                    User Guide
+                  </Link>
                 </Typography>
               </MenuItem>
             </Menu>
@@ -125,38 +135,33 @@ const Header = (props: Props) => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              key='start'
               onClick={handleDrawerOpen}
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
             >
               Start/Edit
             </Button>
-            {items.map((item) => (
-              <Button
-                key={item}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                style={{ textTransform: 'none' }}
-              >
-                {item}
-              </Button>
-            ))}
             <Button
-              key='doc'
               onClick={handleExportPng}
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
             >
-              Export
+              Export diagram as Image
             </Button>
             <Button
-              key='doc'
-              onClick={handleCloseNavMenu}
+              onClick={handleExportXML}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              style={{ textTransform: 'none' }}
+            >
+              Export diagram as XML
+            </Button>
+
+            <Button
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
               component={Link}
               to='/document'
+              target='_blank'
             >
               User Guide
             </Button>

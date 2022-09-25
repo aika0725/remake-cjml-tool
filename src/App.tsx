@@ -29,7 +29,6 @@ declare module '@mui/material/styles' {
 
 function App() {
   const [open, setOpen] = React.useState<OpenContext['open']>(true)
-
   const status = { open, setOpen }
 
   const theme = createTheme()
@@ -45,26 +44,26 @@ function App() {
     <ThemeContext.Provider value={theme}>
       <div className='App'>
         <OpenStatusContext.Provider value={status}>
-          <Header exportRef={canvasRef} />
-          <Main open={open}>
-            <Formik
-              initialValues={formInitialValues}
-              onSubmit={(values) => {
-                alert(JSON.stringify(values, null, 2))
-              }}
-              validationSchema={validationSchema}
-              validateOnChange={false}
-              validateOnBlur={false}
-              validateOnMount={false}
-            >
-              <>
+          <Formik
+            initialValues={formInitialValues}
+            onSubmit={(values) => {
+              alert(JSON.stringify(values, null, 2))
+            }}
+            validationSchema={validationSchema}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validateOnMount={false}
+          >
+            <>
+              <Header exportRef={canvasRef} />
+              <Main open={open}>
                 <FormContent />
                 <S.Canvas ref={exportRef}>
                   <Canvas />
                 </S.Canvas>
-              </>
-            </Formik>
-          </Main>
+              </Main>
+            </>
+          </Formik>
         </OpenStatusContext.Provider>
       </div>
     </ThemeContext.Provider>
