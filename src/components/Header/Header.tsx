@@ -52,10 +52,10 @@ const Header = (props: Props) => {
   return (
     <AppBar
       position='static'
-      style={{ background: '#1e62a2' }}
+      style={{ background: '#1e62a2', boxShadow: 'none' }}
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
-      <Container maxWidth='xl'>
+      <Container style={{ maxWidth: 'none' }}>
         <Toolbar disableGutters>
           <Typography
             variant='h6'
