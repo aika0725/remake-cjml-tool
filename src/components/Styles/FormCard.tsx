@@ -36,6 +36,7 @@ const FormCard = styled.div`
 
 const FormHeader = styled.div`
   display: flex;
+
   justify-content: space-between;
 `
 

@@ -58,7 +58,7 @@ const FormContent = () => {
         >
           <S.FormHeader>
             <S.CJMLFormHeaderTypography>Create a CJML diagram</S.CJMLFormHeaderTypography>
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton onClick={handleDrawerClose} sx={{ mt: 1.5, mb: 1.5 }}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </S.FormHeader>
