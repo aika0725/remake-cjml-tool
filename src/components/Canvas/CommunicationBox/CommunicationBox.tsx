@@ -15,7 +15,7 @@ export enum ArrowDirection {
 }
 
 export interface ArrowInfo {
-  direction: ArrowDirection
+  direction: ArrowDirection | undefined
   length: number
 }
 
@@ -28,8 +28,14 @@ const CommunicationBox = ({ actorID, senderID, receiverID, touchpointDescription
     const indexSender = values.actors.map((actor) => actor.id).indexOf(senderID)
     const indexReceiver = values.actors.map((actor) => actor.id).indexOf(receiverID)
 
-    const arrowDirection: ArrowDirection =
-      indexSender - indexReceiver < 0 ? ArrowDirection.Down : ArrowDirection.Up
+    let arrowDirection: ArrowDirection | undefined
+    if (indexReceiver >= 0 && indexSender !== indexReceiver) {
+      if (indexSender - indexReceiver < 0) {
+        arrowDirection = ArrowDirection.Down
+      } else {
+        arrowDirection = ArrowDirection.Up
+      }
+    }
 
     const arrowLength =
       arrowDirection === ArrowDirection.Up
@@ -60,6 +66,8 @@ const CommunicationBox = ({ actorID, senderID, receiverID, touchpointDescription
       ? touchpointDescription.senderDescription
       : touchpointDescription.receiverDescription
 
+  console.log()
+
   return (
     <>
       {role ? (
@@ -72,12 +80,14 @@ const CommunicationBox = ({ actorID, senderID, receiverID, touchpointDescription
             }
           />
           <D.ChannelImage>
-            <img src={`icons/channels/${touchpointDescription.channel}.png`} />
+            {touchpointDescription.channel && (
+              <img src={`icons/channels/${touchpointDescription.channel}.png`} />
+            )}
           </D.ChannelImage>
           <D.CommunicationContent>
             <Typography variant='caption'>{description}</Typography>
           </D.CommunicationContent>
-          {role === CommunicationRole.Sender && (
+          {role === CommunicationRole.Sender && arrowPosition().direction && (
             <Arrow direction={arrowPosition().direction} length={arrowPosition().length} />
           )}
         </S.CommunicationBoxStyled>

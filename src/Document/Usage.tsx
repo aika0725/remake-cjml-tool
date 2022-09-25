@@ -4,7 +4,7 @@ import { Content } from './Content'
 import Box from '@mui/material/Box'
 import ImageOverview from '../../src/image-doc/tool-overview.png'
 import ImageForm from '../../src/image-doc/form.png'
-import ImageDragDrop from '../../src/image-doc/drag-drop.png'
+import ImageDragDrop from '../../src/image-doc/touchpoint_dragndrop.png'
 import { Image } from './Image-styles'
 import { fontStyles } from './styles'
 
