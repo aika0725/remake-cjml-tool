@@ -61,7 +61,7 @@ const Header = (props: Props) => {
       style={{ background: '#1e62a2', boxShadow: 'none' }}
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
-      <Container style={{ maxWidth: 'none' }}>
+      <Container style={{ maxWidth: 'none', paddingLeft: 30 }}>
         <Toolbar disableGutters>
           <Typography
             variant='h6'
@@ -116,18 +116,18 @@ const Header = (props: Props) => {
 
               <MenuItem onClick={handleExportPng}>
                 <Typography textAlign='center' style={{ textTransform: 'none' }}>
-                  Export diagram as Image
+                  Export as image
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleExportXML}>
                 <Typography textAlign='center' style={{ textTransform: 'none' }}>
-                  Export diagram as XML
+                  Export as XML
                 </Typography>
               </MenuItem>
               <MenuItem key='doc'>
                 <Typography textAlign='center' style={{ textTransform: 'none' }}>
                   <Link to={'/document'} target='_blank'>
-                    User Guide
+                    User guide
                   </Link>
                 </Typography>
               </MenuItem>
@@ -147,14 +147,14 @@ const Header = (props: Props) => {
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
             >
-              Export diagram as Image
+              Export as image
             </Button>
             <Button
               onClick={handleExportXML}
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
             >
-              Export diagram as XML
+              Export as XML
             </Button>
 
             <Button
@@ -164,7 +164,7 @@ const Header = (props: Props) => {
               to='/document'
               target='_blank'
             >
-              User Guide
+              User guide
             </Button>
           </Box>
         </Toolbar>
