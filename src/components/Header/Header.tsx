@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom'
 import { exportAsImage } from '../../helpers/exportAsImage'
 import { exportAsXML } from '../exportAsXML'
 import { useFormikContext } from 'formik'
-import { IFormData } from '../../interfaces/FormData'
+import { formInitialValues, IFormData } from '../../interfaces/FormData'
 
 type Props = {
   exportRef: HTMLDivElement | null
@@ -27,7 +27,7 @@ type Props = {
 const Header = (props: Props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const { setOpen } = useContext(OpenStatusContext)
-  const { values } = useFormikContext<IFormData>()
+  const { values, setValues } = useFormikContext<IFormData>()
 
   useEffect(() => {
     console.log('header' + props.exportRef)
@@ -110,10 +110,9 @@ const Header = (props: Props) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem key='start' onClick={handleDrawerOpen}>
-                Start/Edit
+              <MenuItem key='start' onClick={() => setValues(formInitialValues)}>
+                New
               </MenuItem>
-
               <MenuItem onClick={handleExportPng}>
                 <Typography textAlign='center' style={{ textTransform: 'none' }}>
                   Export as image
@@ -136,11 +135,11 @@ const Header = (props: Props) => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              onClick={handleDrawerOpen}
+              onClick={() => setValues(formInitialValues)}
               sx={{ my: 2, color: 'white', display: 'block' }}
               style={{ textTransform: 'none' }}
             >
-              Start/Edit
+              New
             </Button>
             <Button
               onClick={handleExportPng}

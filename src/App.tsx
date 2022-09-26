@@ -1,16 +1,17 @@
-import { createTheme } from '@mui/material'
+import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material'
 import { Formik } from 'formik'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { ThemeContext } from 'styled-components'
 
 import Canvas from './components/Canvas/Canvas'
-import { OpenContext, OpenStatusContext } from './components/Context/OpenStatusContext'
-import FormContent from './components/Form/FormContent'
 import Header from './components/Header/Header'
 import { Main } from './components/Styles/FormCard'
 import { validationSchema } from './components/validation'
-import { formInitialValues } from './interfaces/FormData'
+import { formInitialValues, IFormData, InitialScenario } from './interfaces/FormData'
 import * as S from '../src/components/Styles/FormCard'
+import Form from './components/Form'
+import { OpenStatusContextProvider } from './hooks/useFormOpenStatus'
+import ToggleFormButton from './components/generic-components/ToggleFormButton'
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -28,10 +29,12 @@ declare module '@mui/material/styles' {
 }
 
 function App() {
-  const [open, setOpen] = React.useState<OpenContext['open']>(true)
-  const status = { open, setOpen }
+  const theme = createTheme({
+    palette: {
+      mode: 'light',
+    },
+  })
 
-  const theme = createTheme()
   const exportRef = useRef<HTMLDivElement>(null)
 
   const [canvasRef, setCanvasRef] = useState<HTMLDivElement | null>(null)
@@ -41,11 +44,11 @@ function App() {
   })
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <div className='App'>
-        <OpenStatusContext.Provider value={status}>
+    <ThemeProvider theme={theme}>
+      <OpenStatusContextProvider>
+        <div className='App'>
           <Formik
-            initialValues={formInitialValues}
+            initialValues={InitialScenario}
             onSubmit={(values) => {
               alert(JSON.stringify(values, null, 2))
             }}
@@ -56,17 +59,20 @@ function App() {
           >
             <>
               <Header exportRef={canvasRef} />
-              <Main open={open}>
-                <FormContent />
-                <S.Canvas ref={exportRef}>
-                  <Canvas />
+              <Main>
+                <Form />
+                <S.Canvas>
+                  <ToggleFormButton />
+                  <div ref={exportRef}>
+                    <Canvas />
+                  </div>
                 </S.Canvas>
               </Main>
             </>
           </Formik>
-        </OpenStatusContext.Provider>
-      </div>
-    </ThemeContext.Provider>
+        </div>
+      </OpenStatusContextProvider>
+    </ThemeProvider>
   )
 }
 

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Typography, withStyles } from '@material-ui/core'
-import { createTheme, keyframes } from '@mui/material'
+import { createTheme, keyframes, withTheme } from '@mui/material'
 import { OpenContext } from '../Context/OpenStatusContext'
 
 const breatheAnimation = keyframes`
@@ -65,29 +65,36 @@ const SectionTitle = styled.div`
   margin-bottom: 20px;
 `
 
-type FormResize = {
-  open: OpenContext['open']
-  width: number
-}
-
-const FormContainer = styled.div<FormResize>`
+const FormContainer = styled.div<{ open: boolean }>`
   box-sizing: border-box;
   display: flex;
   height: 100%;
-  width: 50%;
-  min-width: 450px;
-  margin-left: ${(props) => (props.open ? 0 : -(props.width - 43))}px;
-  max-width: 722px;
+  width: 100%;
+  max-width: 650px;
   background-color: #fafaff;
   border-right: 1px solid #003968;
-  left: 0;
-  top: 77px;
+  top: 0;
   padding: 0px 30px;
   overflow-y: auto;
+  position: relative;
+  transition: ease-in-out 0.25s;
+  margin-left: ${(props) => (props.open ? '0px' : '-580px')};
 
-  @media (max-width: 566px) {
+  @media (max-width: 1536px) {
+    max-width: 600px;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 500px;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 400px;
+  }
+
+  @media (max-width: 600px) {
     width: 100%;
-    margin-left: -${(props) => props.width}px;
+    max-width: unset;
   }
 `
 
@@ -120,12 +127,12 @@ const CJMLFormHeaderTypography = withStyles({
 
 const Canvas = styled.div`
   overflow: auto;
-  top: 77px;
   height: fit-content;
-  margin-top: 7px;
+  position: relative;
+  padding: 10px;
 `
 
-const Main = styled.div<OpenContext['open']>`
+const Main = styled.div`
   display: flex;
   flex-direction: row;
   height: calc(100vh - 68.5px);

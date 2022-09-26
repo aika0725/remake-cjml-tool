@@ -1,7 +1,4 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import { Divider, IconButton } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Divider } from '@mui/material'
 import { useFormikContext } from 'formik'
 import debounce from 'lodash/debounce'
 import React, { useEffect, useMemo } from 'react'
@@ -9,14 +6,15 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 import { useElementSize } from 'usehooks-ts'
 
 import { reorder } from '../../helpers/reorder'
+import { useFormOpenStatus } from '../../hooks/useFormOpenStatus'
 import { IFormData } from '../../interfaces/FormData'
-import { OpenStatusContext } from '../Context/OpenStatusContext'
 import * as S from '../Styles/FormCard'
 import ActorsSection from './Sections/ActorsSection'
 import TouchpointsSection from './Sections/TouchpointsSection'
 
-const FormContent = () => {
-  const theme = useTheme()
+const Form = () => {
+  const { open } = useFormOpenStatus()
+
   const { values, validateForm, setFieldValue } = useFormikContext<IFormData>()
 
   const debouncedValidate = useMemo(() => debounce(validateForm, 100), [validateForm])
@@ -26,16 +24,10 @@ const FormContent = () => {
     debouncedValidate(values)
   }, [values, debouncedValidate])
 
-  const { open, setOpen } = React.useContext(OpenStatusContext)
   const [formRef, { width }] = useElementSize()
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // handleSubmit()
   }
 
   const handleDragEnd = ({ destination, source }: DropResult) => {
@@ -49,7 +41,7 @@ const FormContent = () => {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <S.FormContainer open={open} width={width} ref={formRef}>
+      <S.FormContainer open={open} ref={formRef}>
         <form
           onSubmit={(e) => {
             handleFormSubmit(e)
@@ -58,20 +50,14 @@ const FormContent = () => {
         >
           <S.FormHeader>
             <S.CJMLFormHeaderTypography>Create a CJML diagram</S.CJMLFormHeaderTypography>
-            <IconButton onClick={handleDrawerClose} sx={{ mt: 1.5, mb: 1.5 }}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
           </S.FormHeader>
           <Divider />
           <ActorsSection />
           <TouchpointsSection />
-          {/* <Button color='primary' variant='contained' fullWidth onClick={() => handleSubmit()}>
-            Submit
-          </Button> */}
         </form>
       </S.FormContainer>
     </DragDropContext>
   )
 }
 
-export default FormContent
+export default Form

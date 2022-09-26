@@ -1,5 +1,4 @@
 import { useFormikContext } from 'formik'
-import React from 'react'
 import { IFormData } from '../../../interfaces/FormData'
 import ActorInfo from '../ActorInfo/ActorInfo'
 import * as D from '../diagram.style'
@@ -7,7 +6,6 @@ import TouchpointInfo from '../TouchpointInfo'
 
 const Swimlane = () => {
   const { values } = useFormikContext<IFormData>()
-
   return (
     <>
       {values.actors.map((actor, index) => {

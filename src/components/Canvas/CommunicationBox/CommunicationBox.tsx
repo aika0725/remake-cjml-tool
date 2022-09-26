@@ -66,8 +66,6 @@ const CommunicationBox = ({ actorID, senderID, receiverID, touchpointDescription
       ? touchpointDescription.senderDescription
       : touchpointDescription.receiverDescription
 
-  console.log()
-
   return (
     <>
       {role ? (
