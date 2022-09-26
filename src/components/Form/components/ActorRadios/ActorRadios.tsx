@@ -1,9 +1,9 @@
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { IFormData } from '../../interfaces/FormData'
+import { IFormData } from '../../../../interfaces/FormData'
 import { useFormikContext } from 'formik'
-import { IAction, ICommunication, TouchpointType } from '../../interfaces/Touchpoint'
+import { IAction, ICommunication, TouchpointType } from '../../../../interfaces/Touchpoint'
 
 type Props = {
   name: string

@@ -1,19 +1,14 @@
 import { Typography } from '@mui/material'
 import { FieldArray, useFormikContext } from 'formik'
-import React, { RefObject, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
-import { IFormData } from '../../../interfaces/FormData'
-import { IAction, ICommunication, TouchpointType } from '../../../interfaces/Touchpoint'
-import ActionCard from '../../ActionCard'
-import CommunicationCard from '../../CommunicationCard'
-import Loading from '../../generic-components/Loading'
-import { Section, SectionTitle } from '../../Styles/FormCard'
-import TouchpointTypeButtons from '../../TouchpointTypeButtons/TouchpointTypeButtons'
-
-type Props = {
-  isUpdating: boolean
-}
+import { IFormData } from '../../../../interfaces/FormData'
+import { IAction, ICommunication, TouchpointType } from '../../../../interfaces/Touchpoint'
+import ActionCard from './ActionCard'
+import CommunicationCard from './CommunicationCard'
+import { Section, SectionTitle } from '../../../Styles/FormCard'
+import TouchpointTypeButtons from '../../../TouchpointTypeButtons/TouchpointTypeButtons'
 
 const TouchpointsSection = () => {
   const { values } = useFormikContext<IFormData>()

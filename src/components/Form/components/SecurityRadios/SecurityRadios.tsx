@@ -4,10 +4,10 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
-import { IFormData } from '../../interfaces/FormData'
+import { IFormData } from '../../../../interfaces/FormData'
 import { useFormikContext } from 'formik'
-import * as S from '../Styles/FormCard'
-import { RiskCategory } from '../../interfaces/Touchpoint'
+import * as S from '../../../Styles/FormCard'
+import { RiskCategory } from '../../../../interfaces/Touchpoint'
 type Props = {
   name: string
 }

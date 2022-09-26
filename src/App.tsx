@@ -1,33 +1,17 @@
-import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material'
 import { Formik } from 'formik'
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { ThemeContext } from 'styled-components'
 
+import * as S from '../src/components/Styles/FormCard'
 import Canvas from './components/Canvas/Canvas'
+import Form from './components/Form'
+import ToggleFormButton from './components/generic-components/ToggleFormButton'
+import ToggleFormButtonMobile from './components/generic-components/ToggleFormButtonMobile'
 import Header from './components/Header/Header'
 import { Main } from './components/Styles/FormCard'
 import { validationSchema } from './components/validation'
-import { formInitialValues, IFormData, InitialScenario } from './interfaces/FormData'
-import * as S from '../src/components/Styles/FormCard'
-import Form from './components/Form'
 import { OpenStatusContextProvider } from './hooks/useFormOpenStatus'
-import ToggleFormButton from './components/generic-components/ToggleFormButton'
-import ToggleFormButtonMobile from './components/generic-components/ToggleFormButtonMobile'
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string
-    }
-  }
-
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string
-    }
-  }
-}
+import { InitialScenario } from './interfaces/FormData'
 
 function App() {
   const theme = createTheme({

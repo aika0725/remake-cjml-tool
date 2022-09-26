@@ -2,10 +2,10 @@ import React from 'react'
 
 import { useFormikContext } from 'formik'
 import { MenuItem } from '@material-ui/core'
-import { IFormData } from '../../interfaces/FormData'
-import * as S from '../Styles/FormCard'
-import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
-import { ActorRoles } from '../../interfaces/Actor'
+import { IFormData } from '../../../../../interfaces/FormData'
+import * as S from '../../../../Styles/FormCard'
+import GenericInputTextField from '../../../../generic-components/GenericInputTextField/GenericInputTextField'
+import { ActorRoles } from '../../../../../interfaces/Actor'
 
 type Props = {
   name: string

@@ -1,19 +1,22 @@
 import { FormControl, FormLabel, Typography } from '@material-ui/core'
-import { FieldArrayRenderProps, useFormikContext } from 'formik'
-import React, { useEffect } from 'react'
-
-import { IFormData } from '../../interfaces/FormData'
-import ActorRadios from '../ActorRadios/ActorRadios'
-import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
-import SecurityRadios from '../SecurityRadios'
-
-import * as S from '../Styles/FormCard'
-import DeleteButton from '../DeleteButton/DeleteButton'
 import { MenuItem, TextField, ThemeProvider } from '@mui/material'
-import { ICommunication, TouchpointChannels, TouchpointType } from '../../interfaces/Touchpoint'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { FieldArrayRenderProps, useFormikContext } from 'formik'
+import React from 'react'
+
+import { IFormData } from '../../../../../interfaces/FormData'
+import {
+  ICommunication,
+  TouchpointChannels,
+  TouchpointType,
+} from '../../../../../interfaces/Touchpoint'
+import ActorRadios from '../../../components/ActorRadios/ActorRadios'
+import DeleteButton from '../../../../generic-components/DeleteButton/DeleteButton'
+import GenericInputTextField from '../../../../generic-components/GenericInputTextField/GenericInputTextField'
+import SecurityRadios from '../../../components/SecurityRadios'
+import * as S from '../../../../Styles/FormCard'
 
 type Props = {
   index: number

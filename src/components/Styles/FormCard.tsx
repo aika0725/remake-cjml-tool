@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { Typography, withStyles } from '@material-ui/core'
-import { createTheme, keyframes, withTheme } from '@mui/material'
-import { OpenContext } from '../Context/OpenStatusContext'
+import { createTheme, keyframes } from '@mui/material'
 
 const breatheAnimation = keyframes`
  0% { opacity: 0 }
@@ -9,7 +8,6 @@ const breatheAnimation = keyframes`
 `
 
 const FormCard = styled.div`
-  /* height: fit-content; */
   animation-name: ${breatheAnimation};
   animation-duration: 0.25s;
   box-sizing: border-box;
@@ -76,10 +74,6 @@ const Main = styled.div`
   display: flex;
   flex-direction: row;
   height: calc(100vh - 68.5px);
-
-  /* @media (max-width: 900px) {
-    flex-direction: row;
-  } */
 `
 
 const FormContainer = styled.div<{ open: boolean }>`

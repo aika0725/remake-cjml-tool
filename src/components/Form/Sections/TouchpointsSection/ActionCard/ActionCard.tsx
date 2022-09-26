@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
-
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
-import { IFormData } from '../../interfaces/FormData'
+import { IFormData } from '../../../../../interfaces/FormData'
 import { FieldArrayRenderProps, useFormikContext } from 'formik'
 import { FormHelperText, ThemeProvider, Typography } from '@mui/material'
 
-import ActorRadios from '../ActorRadios/ActorRadios'
-import SecurityRadios from '../SecurityRadios'
-import * as S from '../Styles/FormCard'
-import GenericInputTextField from '../GenericInputTextField/GenericInputTextField'
-import DeleteButton from '../DeleteButton/DeleteButton'
-import { IAction, TouchpointType } from '../../interfaces/Touchpoint'
+import ActorRadios from '../../../components/ActorRadios/ActorRadios'
+import SecurityRadios from '../../../components/SecurityRadios'
+import * as S from '../../../../Styles/FormCard'
+import GenericInputTextField from '../../../../generic-components/GenericInputTextField/GenericInputTextField'
+import DeleteButton from '../../../../generic-components/DeleteButton/DeleteButton'
+import { IAction, TouchpointType } from '../../../../../interfaces/Touchpoint'
 
 type Props = {
   index: number

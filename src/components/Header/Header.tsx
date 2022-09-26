@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import {
   AppBar,
@@ -13,7 +13,6 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { OpenStatusContext } from '../Context/OpenStatusContext'
 import { Link } from 'react-router-dom'
 import { exportAsImage } from '../../helpers/exportAsImage'
 import { exportAsXML } from '../exportAsXML'
@@ -26,16 +25,11 @@ type Props = {
 
 const Header = (props: Props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const { setOpen } = useContext(OpenStatusContext)
   const { values, setValues } = useFormikContext<IFormData>()
 
   useEffect(() => {
     console.log('header' + props.exportRef)
   }, [props.exportRef])
-
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)

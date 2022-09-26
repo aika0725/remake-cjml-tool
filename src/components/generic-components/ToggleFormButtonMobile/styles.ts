@@ -1,7 +1,3 @@
-//   @media (max-width: 900px) {
-//     position: absolute;
-//     /* fixed */
-//   }
 import styled from '@emotion/styled'
 
 export const ToggleFormButtonMobile = styled.div`

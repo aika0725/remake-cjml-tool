@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import { IActor } from '../../interfaces/Actor'
 
 const TextInput = () => {
   return (

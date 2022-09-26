@@ -1,11 +1,11 @@
 import React from 'react'
 import { Typography, Button } from '@mui/material'
 import { FieldArray, useFormikContext } from 'formik'
-import { IFormData } from '../../../interfaces/FormData'
-import ActorCard from '../../ActorCard/ActorCard'
-import DeleteButton from '../../DeleteButton/DeleteButton'
+import { IFormData } from '../../../../interfaces/FormData'
+import ActorCard from './ActorCard'
+import DeleteButton from '../../../generic-components/DeleteButton/DeleteButton'
 import AddIcon from '@mui/icons-material/Add'
-import { CardHeader, FormCard, Section, SectionTitle } from '../../Styles/FormCard'
+import { CardHeader, FormCard, Section, SectionTitle } from '../../../Styles/FormCard'
 
 const ActorsSection = () => {
   const { values } = useFormikContext<IFormData>()

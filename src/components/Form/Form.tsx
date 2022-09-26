@@ -24,7 +24,7 @@ const Form = () => {
     debouncedValidate(values)
   }, [values, debouncedValidate])
 
-  const [formRef, { width }] = useElementSize()
+  const [formRef] = useElementSize()
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
