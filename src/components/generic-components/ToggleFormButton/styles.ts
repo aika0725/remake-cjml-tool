@@ -18,11 +18,17 @@ export const ToggleFormButton = styled.div`
   gap: 5px;
   transition: 0.25s;
   cursor: pointer;
+
   :hover {
     background-color: #ededf2;
   }
+
   img {
     width: 20px;
     height: auto;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
   }
 `

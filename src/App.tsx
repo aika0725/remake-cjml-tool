@@ -12,6 +12,7 @@ import * as S from '../src/components/Styles/FormCard'
 import Form from './components/Form'
 import { OpenStatusContextProvider } from './hooks/useFormOpenStatus'
 import ToggleFormButton from './components/generic-components/ToggleFormButton'
+import ToggleFormButtonMobile from './components/generic-components/ToggleFormButtonMobile'
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -60,6 +61,7 @@ function App() {
             <>
               <Header exportRef={canvasRef} />
               <Main>
+                <ToggleFormButtonMobile />
                 <Form />
                 <S.Canvas>
                   <ToggleFormButton />

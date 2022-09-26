@@ -65,6 +65,23 @@ const SectionTitle = styled.div`
   margin-bottom: 20px;
 `
 
+const Canvas = styled.div`
+  overflow: auto;
+  height: fit-content;
+  position: relative;
+  padding: 10px;
+`
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 68.5px);
+
+  /* @media (max-width: 900px) {
+    flex-direction: row;
+  } */
+`
+
 const FormContainer = styled.div<{ open: boolean }>`
   box-sizing: border-box;
   display: flex;
@@ -78,23 +95,36 @@ const FormContainer = styled.div<{ open: boolean }>`
   overflow-y: auto;
   position: relative;
   transition: ease-in-out 0.25s;
-  margin-left: ${(props) => (props.open ? '0px' : '-580px')};
+  margin-left: ${(props) => (props.open ? '0px' : '-610px')};
 
   @media (max-width: 1536px) {
     max-width: 600px;
+    margin-left: ${(props) => (props.open ? '0px' : '-570px')};
   }
 
   @media (max-width: 1200px) {
     max-width: 500px;
+    margin-left: ${(props) => (props.open ? '0px' : '-480px')};
   }
 
   @media (max-width: 900px) {
-    max-width: 400px;
+    /* width: unset; */
+    max-width: 100%;
+    min-width: 100%;
+    position: absolute;
+    z-index: 999;
+    margin-left: unset;
+    top: 56px;
+    transform: ${(props) => !props.open && 'translateX(-100%)'};
+    /* max-width: unset; */
+    /* display: none; */
+    /* margin-left: ${(props) => (props.open ? '0px' : '-200px')}; */
+    /* display: ${(props) => !props.open && 'none'}; */
   }
 
   @media (max-width: 600px) {
-    width: 100%;
-    max-width: unset;
+    /* width: 100%; */
+    /* max-width: unset; */
   }
 `
 
@@ -124,23 +154,6 @@ const CJMLFormHeaderTypography = withStyles({
     fontWeight: 600,
   },
 })(Typography)
-
-const Canvas = styled.div`
-  overflow: auto;
-  height: fit-content;
-  position: relative;
-  padding: 10px;
-`
-
-const Main = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: calc(100vh - 68.5px);
-
-  @media (max-width: 566px) {
-    flex-direction: column;
-  }
-`
 
 export {
   Main,
