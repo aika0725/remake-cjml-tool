@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import {
   AppBar,
   Typography,
@@ -18,12 +17,30 @@ import { exportAsImage } from '../../helpers/exportAsImage'
 import { exportAsXML } from '../exportAsXML'
 import { useFormikContext } from 'formik'
 import { formInitialValues, IFormData } from '../../interfaces/FormData'
+import { makeStyles } from '@material-ui/core/styles'
+
+const buttonStyles = makeStyles({
+  reset: {
+    background: 'linear-gradient(60deg, #1976d2 30%, #1976d2 90%)',
+    // background: '#527dda 30%',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px #7c73db4c',
+    color: 'white',
+    height: 38,
+    padding: '0 16px',
+    marginLeft: '70px',
+    marginRight: '20px',
+  },
+})
 
 type Props = {
   exportRef: HTMLDivElement | null
 }
 
 const Header = (props: Props) => {
+  const buttonStyle = buttonStyles()
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const { values, setValues } = useFormikContext<IFormData>()
 
@@ -105,7 +122,7 @@ const Header = (props: Props) => {
               }}
             >
               <MenuItem key='start' onClick={() => setValues(formInitialValues)}>
-                New
+                New/Reset form
               </MenuItem>
               <MenuItem onClick={handleExportPng}>
                 <Typography textAlign='center' style={{ textTransform: 'none' }}>
@@ -131,9 +148,10 @@ const Header = (props: Props) => {
             <Button
               onClick={() => setValues(formInitialValues)}
               sx={{ my: 2, color: 'white', display: 'block' }}
-              style={{ textTransform: 'none' }}
+              // style={{ textTransform: 'none' }}
+              className={buttonStyle.reset}
             >
-              New
+              New/Reset form
             </Button>
             <Button
               onClick={handleExportPng}
