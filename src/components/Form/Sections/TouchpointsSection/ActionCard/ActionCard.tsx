@@ -25,6 +25,7 @@ const ActionCard = (props: Props) => {
     return touchpointError
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getSafeError = (err: boolean | string): any => {
     if (err !== undefined) {
       return err

@@ -3,12 +3,11 @@ export const exportAsXML = (values) => {
   const elementsActor = ()=>{
     let actorData = ''
     values.actors.map((actor)=>{
-      actorData+= `<Actor id=${actor.id} name=${actor.actorName} role=${actor.actorRole}/>`
+      actorData+= `<actor id=${actor.id} name=${actor.actorName} role=${actor.actorRole}/>`
       // console.log(`<Actor name=${actor.actorName} role=${actor.actorRole}/>`)
     })
     return(actorData)
   }
-  console.log(elementsActor())
 
   const elementsTouchpoint = ()=>{
     let touchpointData = ''

@@ -14,8 +14,8 @@ export const formInitialValues: IFormData = {
 export const InitialScenario = {
   actors: [
     {
-      id: '249155',
-      actorName: 'Bob',
+      id: '0',
+      actorName: '',
       actorRole: ActorRoles.Customer,
     },
     {

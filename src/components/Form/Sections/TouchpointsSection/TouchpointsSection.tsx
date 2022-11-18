@@ -13,6 +13,7 @@ import TouchpointTypeButtons from '../../../TouchpointTypeButtons/TouchpointType
 const TouchpointsSection = () => {
   const { values } = useFormikContext<IFormData>()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const parentDivRef: any = useRef()
 
   return (

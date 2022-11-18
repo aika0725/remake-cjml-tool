@@ -6,6 +6,7 @@ type Props = {
   name: string
   label: string
   value: string | undefined
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleChange: (e: string | ChangeEvent<any>) => void
 
   error?: boolean | undefined
